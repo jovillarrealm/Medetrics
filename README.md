@@ -6,7 +6,7 @@
 - Katherine
 - Jorge
 
-## Manual Style Build from AppSeed's Creative Tim 
+## Manual Style Build from AppSeed's Creative Tim
 
 > 👉 Download the code  
 
