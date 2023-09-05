@@ -9,14 +9,20 @@
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
+    {% extends 'base.html' %}
+    {% block content %}
+
     <div class="container mt-4">
         <div class="row">
-            <!-- Columna izquierda para la tabla y el campo de búsqueda de la tabla 1 -->
+            <!-- Columna izquierda para la tabla 1 y los campos de búsqueda -->
             <div class="col-md-6">
-                <!-- Campo de búsqueda de la tabla 1 -->
+                <!-- Lista desplegable para seleccionar el criterio de búsqueda en la tabla 1 -->
                 <div class="input-group mb-3 text-left">
-                    <input type="text" class="form-control" id="searchInput1" placeholder="Buscar por enfermedad...">
-                    <button class="btn btn-primary" onclick="searchTable('searchInput1', 'table1')">Buscar</button>
+                    <select class="form-select" id="select1">
+                        <option value="enfermedad">Enfermedad</option>
+                    </select>
+                    <input type="text" class="form-control" id="searchInput1" placeholder="Buscar...">
+                    <button class="btn btn-primary" onclick="searchTable('select1', 'searchInput1', 'table1')">Buscar</button>
                 </div>
                 <!-- Tabla 1 -->
                 <table class="table table-striped table-sm text-left" id="table1">
@@ -41,12 +47,14 @@
                     </tbody>
                 </table>
 
-                <!-- Campo de búsqueda de la tabla 2 -->
                 <div class="input-group mb-3 text-left">
-                    <input type="text" class="form-control" id="searchInput2" placeholder="Buscar por municipio...">
-                    <button class="btn btn-primary" onclick="searchTable('searchInput2', 'table2')">Buscar</button>
+                    <select class="form-select" id="select2">
+                        <option value="date">Fecha</option>
+                    </select>
+                    <input type="text" class="form-control" id="searchInput1" placeholder="Buscar...">
+                    <button class="btn btn-primary" onclick="searchTable('select2', 'searchInput2', 'table2')">Buscar</button>
                 </div>
-                <!-- Tabla 2 -->
+                <!-- Tabla 1 -->
                 <table class="table table-striped table-sm text-left" id="table2">
                     <!-- Encabezados de la tabla 2 -->
                     <thead>
@@ -68,6 +76,7 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                
             </div>
             <!-- Columna derecha para la imagen -->
             <div class="col-md-6">
@@ -80,7 +89,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+dl+VmbdFf/4C5nP5h+CWhcl5n5HPr1Oksd3P/hfX4Pp6q7G" crossorigin="anonymous"></script>
 
     <script>
-        function searchTable(inputId, tableId) {
+        function searchTable(selectId, inputId, tableId) {
+            // Obtén el valor seleccionado en la lista desplegable
+            var selectedValue = document.getElementById(selectId).value;
+            
             // Obtén el valor del campo de búsqueda
             var searchText = document.getElementById(inputId).value.toLowerCase();
             
@@ -90,10 +102,12 @@
             // Obtén todas las filas de la tabla
             var rows = table.querySelectorAll('tbody tr');
 
-            // Itera sobre las filas y muestra u oculta según el texto de búsqueda
+            // Itera sobre las filas y muestra u oculta según el criterio de búsqueda
             rows.forEach(function(row) {
                 var rowData = row.textContent.toLowerCase();
-                if (rowData.includes(searchText)) {
+                if (selectedValue === 'enfermedad' && rowData.includes(searchText)) {
+                    row.style.display = '';
+                } else if (selectedValue === 'date' && rowData.includes(searchText)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';
@@ -101,5 +115,6 @@
             });
         }
     </script>
+    {% endblock content %}
 </body>
 </html>
