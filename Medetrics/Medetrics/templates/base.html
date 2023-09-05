@@ -28,7 +28,9 @@
                 margin-bottom: 60px; /* Ajusta el margen inferior para que el contenido no se solape con el footer */
             }
         </style>
-</head>
+        {% block title%}
+        {% endblock title%}
+    </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
@@ -36,7 +38,7 @@
             <a class="navbar-brand" href="#"
                 style="font-family: 'Inter', sans-serif; font-weight: bold; font-size: 47px;">
                 {% load static %}
-                <img src="{% static 'images/icono.jpg' %}" alt="" width="30" height="24"
+                <img src="{% static 'nav/icono.png' %}" alt="" width="30" height="24"
                     class="d-inline-block align-text-top" />Medetrics
             </a>
 
@@ -47,7 +49,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
                     <div class="navbar-nav ms-auto">
-                        <a class="nav-link" href="#" style="color: #366CF1; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: bold;">Reportes</a>
+                        <a class="nav-link" href="{% url 'reportes' %}" style="color: #366CF1; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: bold;">Reportes</a>
                         <a class="nav-link" href="{% url 'visualizacion' %}" style="color: #366CF1; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: bold;">Visualización</a>
                         <a class="nav-link" href="#" style="color: #366CF1; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: bold;">Login</a>
                         <a class="nav-link" href="#" style="color: #366CF1; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: bold;">Sign Up</a>
@@ -58,13 +60,13 @@
         </div>
     </nav>
     <div class="container">
-
-        <footer class="custom-footer">
-            Una idea de EAFIT |© Copyright 2023
-        </footer>
-
         {% block content %}
         {% endblock content %}
+
+        <footer class="custom-footer">
+            Una idea de EAFIT | © Copyright 2023
+        </footer>
+
     </div>
 
 </body>
