@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>Mostrar Elementos</title>
+    {% endblock title %}
+    <!-- Agrega el enlace a Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+    {% block content %}
+
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Columna izquierda para la tabla 1 y los campos de búsqueda -->
+            <div class="col-md-6">
+                <!-- Lista desplegable para seleccionar el criterio de búsqueda en la tabla 1 -->
+                <div class="input-group mb-3 text-left">
+                    <select class="form-select" id="select1">
+                        <option value="enfermedad">Enfermedad</option>
+                    </select>
+                    <input type="text" class="form-control" id="searchInput1" placeholder="Buscar...">
+                    <button class="btn btn-primary" onclick="searchTable('select1', 'searchInput1', 'table1')">Buscar</button>
+                </div>
+                <!-- Tabla 1 -->
+                <table class="table table-striped table-sm text-left" id="table1">
+                    <!-- Encabezados de la tabla 1 -->
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Enfermedad</th>
+                            <th>Casos</th>
+                        </tr>
+                    </thead>
+                    <!-- Cuerpo de la tabla 1 -->
+                    <tbody>
+                        <!-- Ciclo para llenar la tabla 1 con datos de Django o lo que necesites -->
+                        {% for visualizacion in visualizacions %}
+                        <tr>
+                            <td>{{ visualizacion.headline }}</td>
+                            <td>{{ visualizacion.body }}</td>
+                            <td>{{ visualizacion.date }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="input-group mb-3 text-left">
+                    <select class="form-select" id="select2">
+                        <option value="date">Fecha</option>
+                    </select>
+                    <input type="text" class="form-control" id="searchInput1" placeholder="Buscar...">
+                    <button class="btn btn-primary" onclick="searchTable('select2', 'searchInput2', 'table2')">Buscar</button>
+                </div>
+                <!-- Tabla 1 -->
+                <table class="table table-striped table-sm text-left" id="table2">
+                    <!-- Encabezados de la tabla 2 -->
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Enfermedad</th>
+                            <th>Casos</th>
+                        </tr>
+                    </thead>
+                    <!-- Cuerpo de la tabla 2 -->
+                    <tbody>
+                        <!-- Ciclo para llenar la tabla 2 con datos de Django o lo que necesites -->
+                        {% for visualizacion in visualizacions %}
+                        <tr>
+                            <td>{{ visualizacion.headline }}</td>
+                            <td>{{ visualizacion.body }}</td>
+                            <td>{{ visualizacion.date }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+            </div>
+            <!-- Columna derecha para la imagen -->
+            <div class="col-md-6">
+                <img src="https://media.discordapp.net/attachments/882766852902748187/1148441512233934899/IMG_1234.png" alt="Imagen" class="img-fluid">
+            </div>
+        </div>
+    </div>
+
+    <!-- Agrega el script de Bootstrap al final del documento -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+dl+VmbdFf/4C5nP5h+CWhcl5n5HPr1Oksd3P/hfX4Pp6q7G" crossorigin="anonymous"></script>
+
+    <script>
+        function searchTable(selectId, inputId, tableId) {
+            // Obtén el valor seleccionado en la lista desplegable
+            var selectedValue = document.getElementById(selectId).value;
+            
+            // Obtén el valor del campo de búsqueda
+            var searchText = document.getElementById(inputId).value.toLowerCase();
+            
+            // Obtén la tabla correspondiente
+            var table = document.getElementById(tableId);
+
+            // Obtén todas las filas de la tabla
+            var rows = table.querySelectorAll('tbody tr');
+
+            // Itera sobre las filas y muestra u oculta según el criterio de búsqueda
+            rows.forEach(function(row) {
+                var rowData = row.textContent.toLowerCase();
+                if (selectedValue === 'enfermedad' && rowData.includes(searchText)) {
+                    row.style.display = '';
+                } else if (selectedValue === 'date' && rowData.includes(searchText)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
+    {% endblock content %}
+</body>
+</html>
