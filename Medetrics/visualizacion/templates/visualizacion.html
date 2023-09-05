@@ -1,27 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar Elementos</title>
+    <!-- Agrega el enlace a Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
-
 <body>
-    <div class="container">
-        <h1 class="text-center">Visualizacion</h1>
 
-        <div class="container">
-            {% for visualizacion in visualizacions %}
-            <div class="card mb-3">
-                <div class="rpw g-0">
-                    <div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ visualizacion.headline }}</h5>
-                            <p class="card-text">{{ visualizacion.body }}</p>
-                            <p class="card-text"><small class="text-muted">
-                                    {{ visualizacion.date }}
-                                </small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+    <div class="container">
+        <h1 class="text-center">Mostrar Enfermedades</h1>
+
+        <!-- Campo de búsqueda y botón -->
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="searchInput" placeholder="Buscar Enfermedad...">
+            <button class="btn btn-primary" onclick="searchTable()">Buscar</button>
         </div>
+
+        <!-- Tabla con elementos -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Enfermedad</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for visualizacion in visualizacions %}
+                <tr>
+                    <td>{{ visualizacion.headline }}</td>
+                    <td>{{ visualizacion.body }}</td>
+                    <td>{{ visualizacion.date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Agrega el script de Bootstrap al final del documento -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+dl+VmbdFf/4C5nP5h+CWhcl5n5HPr1Oksd3P/hfX4Pp6q7G" crossorigin="anonymous"></script>
+
+    <script>
+        function searchTable() {
+            // Obtén el valor del campo de búsqueda
+            var searchText = document.getElementById('searchInput').value.toLowerCase();
+            
+            // Obtén todas las filas de la tabla
+            var rows = document.querySelectorAll('table tbody tr');
+    
+            // Itera sobre las filas y muestra u oculta según el texto de búsqueda
+            rows.forEach(function(row) {
+                var rowData = row.textContent.toLowerCase();
+                if (rowData.includes(searchText)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
 </body>
+</html>
