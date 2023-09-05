@@ -1,10 +1,12 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">"
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block title %}
+        {% endblock title %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">"
+    </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
@@ -22,7 +24,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="#"
+                    <a class="nav-link" href="{% url 'reportes' %}"
                         style="color: #366CF1; font-family: 'Inter', sans-serif; font-size: 20px;">Reportes</a>
                     <a class="nav-link" href="{% url 'visualizacion' %}"
                         style="color: #366CF1; font-family: 'Inter', sans-serif; font-size: 20px;">Visualización</a>
