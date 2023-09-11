@@ -27,6 +27,7 @@
             body {
                 margin-bottom: 60px; /* Ajusta el margen inferior para que el contenido no se solape con el footer */
             }
+            
         </style>
         {% load static %}
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
@@ -37,7 +38,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
         <div class="container">
-            <a class="navbar-brand" href="#"
+            <a class="navbar-brand" href="{% url 'inicio' %}"
                 style="font-family: 'Inter', sans-serif; font-weight: bold; font-size: 47px;">
                 
                 <img src="{% static 'nav/Medetrics.png' %}" alt="" width="47" height="47"
