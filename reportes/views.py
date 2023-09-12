@@ -21,7 +21,10 @@ def reportes(req: HttpRequest):
             #print(form_data, type(form))
             form_data["diagnosis_date"] = form_data["diagnosis_date"].strftime("%Y-%m-%d")
             db = get_db()
-            if dbops.send_report(form_data, db):
-                return render(req, "gracias.html")
-            else:
+            try:
+                if dbops.send_report(form_data, db):
+                    return render(req, "gracias.html")
+                else:
+                    return render(req, "error.html")
+            except:
                 return render(req, "error.html")
