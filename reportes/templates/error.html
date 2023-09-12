@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title> Envío Fallido </title>
+{% endblock title %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+      Reporte no enviado
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Muchas gracias por diligenciar el reporte, pero hubo un fallo enviandolo a la base de datos</h5>
+      <p class="card-text">El problema es de nuestro lado, lo sentimos mucho por las molestias</p>
+      <a href="{% url 'visualizacion' %}" class="btn btn-primary">Mejor hacer otra cosa</a>
+    </div>
+  </div>
+{% endblock content %}

@@ -54,7 +54,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "Medetrics.urls"
+ROOT_URLCONF = "medetrics.urls"
 
 TEMPLATES = [
     {
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "Medetrics.wsgi.application"
+WSGI_APPLICATION = "medetrics.wsgi.application"
 
 
 # Database
