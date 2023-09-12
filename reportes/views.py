@@ -3,7 +3,7 @@ from django.http import HttpRequest
 from reportes.forms import ReportForm
 
 
-from medetrics.mongo_data import get_db
+from reportes.mongo_data import get_db
 import reportes.dbops as dbops
 from typing import Any
 

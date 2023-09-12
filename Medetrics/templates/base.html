@@ -2,46 +2,23 @@
 <html lang="en">
 
 <head>
+    {% load static %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">"
-        <style>
-            /* Estilo personalizado para el pie de página */
-            .custom-footer {
-                background-color: #001A59;
-                color: white;
-                text-align: left;
-                padding: 10px;
-                font-family: 'Inter', sans-serif;
-                font-weight: normal;
-                /* Elimina position: absolute y width */
-                /* position: absolute; */
-                /* bottom: 0; */
-                width: 100%; /* Asegura que el ancho sea del 100% */
-                position: fixed; /* Fija el footer en la parte inferior de la ventana */
-                left: 0;
-                right: 0;
-                bottom: 0;
-            }
         
-            /* Estilo para el cuerpo de la página para separar el contenido del footer */
-            body {
-                margin-bottom: 60px; /* Ajusta el margen inferior para que el contenido no se solape con el footer */
-            }
-            
-        </style>
-        {% load static %}
-        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/medetrics.png' %}" >
         {% block title%}
         {% endblock title%}
+        <link rel='stylesheet' href="{% static 'css/custom_styles.css' %}">
     </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'inicio' %}"
+            <a class="navbar-brand" href="#"
                 style="font-family: 'Inter', sans-serif; font-weight: bold; font-size: 47px;">
                 
-                <img src="{% static 'nav/Medetrics.png' %}" alt="" width="47" height="47"
+                <img src="{% static 'nav/medetrics.png' %}" alt="" width="47" height="47"
                     class="d-inline-block align-text-top" />Medetrics
             </a>
 
