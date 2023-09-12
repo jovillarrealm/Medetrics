@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
+    {% block title %}
+    <title> Iniciar Sesión </title>
+    {% endblock title %}
     <!-- Agrega el enlace a Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -64,9 +66,13 @@
             /* Aplica el tipo de letra Inter a las etiquetas */
         }
     </style>
+    {% load static %}
+    <link rel='stylesheet' href="{% static 'css/custom_styles.css' %}">
 </head>
 
 <body>
+    
+
     <div class="container">
         <h1>Iniciar Sesión</h1>
         <form action="/login" method="post">
@@ -79,9 +85,12 @@
                 <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
             </div>
             <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+            <a href="{% url 'inicio' %}" class="btn btn-primary">Volver</a>
         </form>
     </div>
-
+    <footer class="custom-footer">
+        Una idea de EAFIT | © Copyright 2023
+    </footer>
     <!-- Agrega el script de Bootstrap al final del documento -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-KyZXEAg3QhqLMpG8r+dl+VmbdFf/4C5nP5h+CWhcl5n5HPr1Oksd3P/hfX4Pp6q7G"

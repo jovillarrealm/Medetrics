@@ -1,6 +1,6 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
-    {% extends 'base.html' %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +44,10 @@
                     </div>
                 </div>
                 <!-- Columna derecha para la imagen -->
-                <div class="col-md-6" style="width: 592px; height: 494px; background-image: url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQGvctjSCLx9dmn84HSJzJswwkajlK7SI2fhnPhNBGxUVDjrBby'); background-size: cover; background-position: center;">
+                {% load static %}
+                <div class="col-md-6" style="width: 592px; height: 494px; background-size: cover; background-position: center;">
+                    <img src="{% static 'images/imagen1.png' %}" alt="" width="752" height="494"
+                    class="d-inline-block align-text-top" />
                 </div>
             </div>
         </div>

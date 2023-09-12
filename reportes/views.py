@@ -3,7 +3,7 @@ from django.http import HttpRequest
 from reportes.forms import ReportForm
 
 
-from reportes.mongo_data import get_db
+
 import reportes.dbops as dbops
 from typing import Any
 
@@ -20,9 +20,8 @@ def reportes(req: HttpRequest):
             form_data: dict[str, Any] = form.cleaned_data
             #print(form_data, type(form))
             form_data["diagnosis_date"] = form_data["diagnosis_date"].strftime("%Y-%m-%d")
-            db = get_db()
             try:
-                if dbops.send_report(form_data, db):
+                if dbops.send_report(form_data):
                     return render(req, "gracias.html")
                 else:
                     return render(req, "error.html")
