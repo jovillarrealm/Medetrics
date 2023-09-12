@@ -18,10 +18,10 @@ def reportes(req: HttpRequest):
         form: ReportForm = ReportForm(req.POST)
         if form.is_valid():
             form_data: dict[str, Any] = form.cleaned_data
-            # print(form, type(form))
+            #print(form_data, type(form))
             form_data["diagnosis_date"] = form_data["diagnosis_date"].strftime("%Y-%m-%d")
             db = get_db()
-            if dbops.send_report(form, db):
+            if dbops.send_report(form_data, db):
                 return render(req, "gracias.html")
             else:
                 return render(req, "error.html")
