@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "visualizacion",
     "reportes",
     "inicio",
+    "login",
 ]
 
 MIDDLEWARE = [
