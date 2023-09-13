@@ -18,11 +18,11 @@ def reportes(req: HttpRequest):
         form: ReportForm = ReportForm(req.POST)
         if form.is_valid():
             form_data: dict[str, Any] = form.cleaned_data
-            if form_data.get("disease") == "Enfermedad":
+            if form_data.get("disease") == "Enfermedades":
                 return render(req, "user_error.html")
-            elif form_data.get("municipio") == "Municipio":
+            elif form_data.get("municipio") == "Municipios":
                 return render(req, "user_error.html")
-            elif form_data.get("Barrio") == "Barrio":
+            elif form_data.get("Barrio") == "Barrios":
                 return render(req, "user_error.html")
             #print(form_data, type(form))
             form_data["diagnosis_date"] = datetime.combine(form_data["diagnosis_date"],datetime.min.time())
