@@ -3,10 +3,14 @@ from django import forms
 from django.forms import ModelForm
 import datetime
 
-# FIXME EVIL BS que debería venir de mongo
-from reportes.data_utils.form_data import municipios, barrios, enfermedades
-# FIXME EVIL BS que debería venir de mongo
 
+from reportes.dbops import get_mock_data
+
+mock_data = get_mock_data()
+
+enfermedades = mock_data[0]
+municipios = mock_data[1]
+barrios= mock_data[2]
 
 
 

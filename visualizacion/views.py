@@ -7,10 +7,12 @@ from .dbops import get_reports
 def visualizacion(request:HttpRequest):
     if request.method == "GET":
         form = QueryForm()
-        reports = get_reports()
-        context = {"form": form}
+        reports = tuple(get_reports())
         visualizacions = Visualizacion.objects.all().order_by('-date')
-        return render(request, 'visualizacion.html', {'visualizacions':visualizacions})
+        context = {"query_form": form,
+                   'visualizacions':visualizacions,
+                   "reports": reports}
+        return render(request, 'visualizacion.html', context)
         #return render(req, "reporte.html", context)
     elif request.method == "POST":
         form = QueryForm(request.POST)
