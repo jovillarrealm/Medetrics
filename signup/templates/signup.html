@@ -15,17 +15,18 @@
     <style>
         /* Estilos personalizados para el formulario de registro */
         body {
+            background-image: url('https://fondosmil.com/fondo/23179.jpg');
             background-color: #fff;
+            background-size: cover;
             /* Cambia el color de fondo a azul */
             display: flex;
-            flex-direction: column;
+            flex-direction: row  ;
             align-items: center;
             justify-content: flex-start;
             font-family: 'Inter', sans-serif;
             /* Aplica el tipo de letra Inter */
             color: white;
-            height: 100vh;
-            margin: 0;
+            margin-top: 50px;
         }
 
         .container {
@@ -36,6 +37,7 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             margin-top: 20px;
+            margin-left: 38%;
             /* Espacio entre la imagen y el contenedor */
         }
 
@@ -83,7 +85,7 @@
 
 <body>
     <!-- Agregar la imagen centrada en la parte superior -->
-    <img src="{% static 'images/signup.png' %}" alt="Imagen" class="centered-image">
+    
 
     <div class="container">
         <h1>Registrarse</h1>
