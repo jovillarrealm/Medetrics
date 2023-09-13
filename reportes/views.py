@@ -27,3 +27,7 @@ def reportes(req: HttpRequest):
                     return render(req, "error.html")
             except:
                 return render(req, "error.html")
+            
+def bienvenida_reportes(req: HttpRequest):
+    context = {}
+    return render(req, "bienvenida_reportes.html", context)
