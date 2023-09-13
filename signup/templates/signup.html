@@ -15,18 +15,18 @@
     <style>
         /* Estilos personalizados para el formulario de registro */
         body {
-            background-image: url('https://fondosmil.com/fondo/23179.jpg');
+            background-image: url('https://sectorinbalorgcom.files.wordpress.com/2016/11/wallpaper-gratis-de-fondo-de-ondas-en-azul-en-hd.jpg');
             background-color: #fff;
             background-size: cover;
             /* Cambia el color de fondo a azul */
             display: flex;
-            flex-direction: row  ;
+            flex-direction: column;
             align-items: center;
             justify-content: flex-start;
             font-family: 'Inter', sans-serif;
             /* Aplica el tipo de letra Inter */
             color: white;
-            margin-top: 50px;
+            margin: 0;
         }
 
         .container {
@@ -36,9 +36,9 @@
             background-color: #001A59;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            margin-top: 20px;
-            margin-left: 38%;
+            margin-top: 0;
             /* Espacio entre la imagen y el contenedor */
+            margin-bottom: 0px;
         }
 
         h1 {
@@ -73,9 +73,9 @@
 
         /* Estilo para la imagen */
         .centered-image {
-            max-width: 200px;
+            max-width: 125px;
             /* Ajusta el ancho de la imagen según tus necesidades */
-            margin: 20px 0;
+
             /* Espacio superior e inferior */
         }
     </style>
@@ -85,8 +85,10 @@
 
 <body>
     <!-- Agregar la imagen centrada en la parte superior -->
-    
 
+    <img src="{% static 'images/signup.png' %}" alt="Imagen"
+        class="centered-image">
+    
     <div class="container">
         <h1>Registrarse</h1>
         <form action="/register" method="post">
