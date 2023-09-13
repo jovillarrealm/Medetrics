@@ -6,4 +6,18 @@
 
 {% block content %}
 
+<form method="post" class="form">
+    {% csrf_token %}
+    
+    {% for field in form %}
+    <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+    </div>
+    {% endfor %}
+    
+    <!-- Botón dentro del form -->
+    <button type="submit" class="btn btn-primary">Enviar Reporte</button>
+</form>
+
 {% endblock content %}
