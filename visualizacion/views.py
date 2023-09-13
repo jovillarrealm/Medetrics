@@ -7,6 +7,7 @@ from .dbops import get_reports
 def visualizacion(request:HttpRequest):
     if request.method == "GET":
         form = QueryForm()
+        print(form)
         reports = tuple(get_reports())
         visualizacions = Visualizacion.objects.all().order_by('-date')
         context = {"query_form": form,

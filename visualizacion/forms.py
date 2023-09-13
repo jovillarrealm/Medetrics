@@ -31,12 +31,19 @@ class BootstrapForm(forms.Form):
 # Se podría configurar un widget de bootstrap correspondiente al tipo de Field
 #  
 class QueryForm(BootstrapForm):
-    disease = forms.ChoiceField(choices=enfermedades,label="Enfermedad")
-    municipio = forms.ChoiceField(choices=municipios ,label="Municipio")
-    #municipio = forms.ChoiceField(choices=municipios ,label="Municipio",widget=forms.Select(attrs={'class': 'form-control'}))
-    barrio = forms.ChoiceField(choices=barrios ,label="Barrio")
-    #barrio = forms.ChoiceField(choices=barrios ,label="Barrio",widget=forms.Select(attrs={'class': 'form-control'}))
-    #diagnosis_place = forms.CharField(label="Lugar de diagnóstico")
-    diagnosis_date = forms.DateField(label="Fecha de diagnósis", initial=datetime.date.today().strftime("%Y-%m-%d"))
-    #diagnosis_validator = forms.CharField(label="Comprobante de diagnóstico")
+    disease = forms.ChoiceField(
+        choices=enfermedades,
+    )
+    
+    municipio = forms.ChoiceField(
+        choices=municipios,
+    )
+    
+    barrio = forms.ChoiceField(
+        choices=barrios,
+    )
+
+    diagnosis_date = forms.DateField(
+        initial=datetime.date.today().strftime("%Y-%m-%d"),
+    )
 
