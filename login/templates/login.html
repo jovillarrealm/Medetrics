@@ -20,20 +20,26 @@
             background-color: #fff;
             /* Cambia el color de fondo a azul */
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+            justify-content: flex-start;
             font-family: 'Inter', sans-serif;
             /* Aplica el tipo de letra Inter */
+            color: white;
+            height: 100vh;
+            margin: 0;
         }
 
         .container {
             max-width: 400px;
-            /* Aumenta el ancho del contenedor */
             padding: 20px;
-            background-color: #366CF1;
+            background-color: #001A59;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-top: 30px;
+            /* Espacio entre la imagen y el contenedor */
+            margin-bottom: 30px;
+            /* Agrega margen inferior para separación */
         }
 
         h1 {
@@ -52,9 +58,9 @@
 
         /* Estilo personalizado para el botón de Iniciar Sesión */
         .btn-primary {
-            background-color: #001A59;
+            background-color: #366CF1;
             /* Cambia el color del botón a azul */
-            border-color: #001A59;
+            border-color: #366CF1;
             /* Cambia el color del borde del botón a azul */
         }
 
@@ -65,13 +71,23 @@
             font-family: 'Inter', sans-serif;
             /* Aplica el tipo de letra Inter a las etiquetas */
         }
+
+        /* Estilo para la imagen */
+        .centered-image {
+            max-width: 250px;
+            /* Ajusta el ancho de la imagen según tus necesidades */
+            margin: 80px 0;
+            /* Espacio superior e inferior */
+        }
     </style>
     {% load static %}
     <link rel='stylesheet' href="{% static 'css/custom_styles.css' %}">
 </head>
 
 <body>
-    
+    <!-- Agregar la imagen centrada en la parte superior -->
+    <img src="{% static 'images/login.png' %}" alt="Imagen"
+        class="centered-image">
 
     <div class="container">
         <h1>Iniciar Sesión</h1>
@@ -84,10 +100,20 @@
                 <label for="password">Contraseña:</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
-            <a href="{% url 'inicio' %}" class="btn btn-primary">Volver</a>
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="{% url 'inicio' %}" class="btn btn-primary">Volver</a>
+                </div>
+            </div>
         </form>
+        <!-- Agregar el enlace de "¿Olvidaste tu contraseña?" aquí -->
+        <p class="text-center"><a href="#" style="color: white;">¿Olvidaste tu contraseña?</a></p>
+        <p class="text-center"><a href="#" style="color: white;">¿No tienes cuenta? Regístrate</a></p>
     </div>
+
     <footer class="custom-footer">
         Una idea de EAFIT | © Copyright 2023
     </footer>
