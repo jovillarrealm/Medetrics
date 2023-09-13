@@ -6,7 +6,7 @@ from reportes.mongo_data import get_db
 
 
 def get_reports(query: dict[str]={}, db: Database=get_db(), collection: str= "reportes") -> Cursor:
-    reports = db[collection].find(query)
+    reports = db[collection].find(filter=query, limit=100)
     return reports
 
 
