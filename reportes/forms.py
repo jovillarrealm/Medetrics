@@ -2,13 +2,13 @@ from collections.abc import Mapping
 from django import forms
 from django.forms import ModelForm
 import datetime
-from .dbops import get_mock_data
+from .dbops import get_input_data
 
-mock_data = get_mock_data()
+mock_data = get_input_data()
 
 enfermedades = mock_data[0]
 municipios = mock_data[1]
-barrios= mock_data[2]
+barrios = mock_data[2]
 
 
 class BootstrapForm(forms.Form):
@@ -33,7 +33,5 @@ class ReportForm(BootstrapForm):
     barrio = forms.ChoiceField(choices=barrios, label="Barrio")
     # barrio = forms.ChoiceField(choices=barrios ,label="Barrio",widget=forms.Select(attrs={'class': 'form-control'}))
     diagnosis_place = forms.CharField(label="Lugar de diagnóstico")
-    diagnosis_date = forms.DateField(
-        label="Fecha de diagnósis", initial=datetime.date.today().strftime("%Y-%m-%d")
-    )
+    diagnosis_date = forms.DateField(initial=datetime.date.today().strftime("%Y-%m-%d"))
     diagnosis_validator = forms.CharField(label="Comprobante de diagnóstico")

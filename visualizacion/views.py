@@ -18,12 +18,9 @@ def visualizacion(request:HttpRequest):
         form = QueryForm(request.POST)
         if form.is_valid():
             form_data: dict = form.cleaned_data
-            #print(form_data, type(form))
+            
             try:
-                if get_reports(form_data):
-                    return render(request, "gracias.html")
-                else:
-                    return render(request, "error.html")
+                pass
             except:
-                return render(request, "error.html")
+                pass
     
