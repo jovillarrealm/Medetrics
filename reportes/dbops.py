@@ -12,17 +12,16 @@ def send_report(
 
 
 @functools.lru_cache(maxsize=1)
-def get_mock_data(db: Database = get_db(), collection: str = "mock_data"):
-    curse = list(db[collection].find())
+def get_input_data(db: Database = get_db(), collection: str = "mock_data"):
+    curse = db[collection].find_one()
     pack = lambda field: (field, field)
     packlist = lambda a, b, c: [
-        tuple(map(pack, a)),
-        tuple(map(pack, b)),
-        tuple(map(pack, c)),
+        list(map(pack, a)),
+        list(map(pack, b)),
+        list(map(pack, c)),
     ]
-    
-    disease = ["Enfermedades"]+list(curse[0]["disease"])
-    municipios = ["Municipios"]+list(curse[0]["municipios"])
-    barrios = ["Barrios"]+list(curse[0]["medellin_barrios"])
+    disease = ["Enfermedades"]+curse["disease"]
+    municipios = ["Municipios"]+curse["municipios"]
+    barrios = ["Barrios"]+curse["medellin_barrios"]
     result =  packlist(disease, municipios, barrios)
     return result

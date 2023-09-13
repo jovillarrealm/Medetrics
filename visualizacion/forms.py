@@ -4,9 +4,9 @@ from django.forms import ModelForm
 import datetime
 
 
-from reportes.dbops import get_mock_data
+from reportes.dbops import get_input_data
 
-mock_data = get_mock_data()
+mock_data = get_input_data()
 
 enfermedades = mock_data[0]
 municipios = mock_data[1]

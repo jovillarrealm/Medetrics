@@ -2,9 +2,9 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from reportes.forms import ReportForm
 
+from datetime import datetime
 
-
-import reportes.dbops as dbops
+from reportes.dbops  import send_report
 from typing import Any
 
 
@@ -18,12 +18,19 @@ def reportes(req: HttpRequest):
         form: ReportForm = ReportForm(req.POST)
         if form.is_valid():
             form_data: dict[str, Any] = form.cleaned_data
+            if form_data.get("disease") == "Enfermedad":
+                return render(req, "user_error.html")
+            elif form_data.get("municipio") == "Municipio":
+                return render(req, "user_error.html")
+            elif form_data.get("Barrio") == "Barrio":
+                return render(req, "user_error.html")
             #print(form_data, type(form))
-            form_data["diagnosis_date"] = form_data["diagnosis_date"].strftime("%Y-%m-%d")
+            form_data["diagnosis_date"] = datetime.combine(form_data["diagnosis_date"],datetime.min.time())
             try:
-                if dbops.send_report(form_data):
+                if send_report(form_data):
                     return render(req, "gracias.html")
                 else:
                     return render(req, "error.html")
+                    pass
             except:
                 return render(req, "error.html")
