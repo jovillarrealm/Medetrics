@@ -26,10 +26,10 @@ def visualizacion(request:HttpRequest):
             if form_data.get(disease) not in ["Enfermedades", "Enfermedad"]:
                 match_stage[disease] = form_data.get(disease)
                 #return render(request, "user_error.html")
-            elif form_data.get(municipio) != "Municipios":
+            if form_data.get(municipio) != "Municipios":
                 match_stage[municipio] = form_data.get(municipio)
                 #return render(request, "user_error.html")
-            elif form_data.get(barrio) != "Barrios":
+            if form_data.get(barrio) != "Barrios":
                 match_stage[barrio] = form_data.get(barrio)
                 #return render(request, "user_error.html")
             
