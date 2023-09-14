@@ -34,3 +34,7 @@ def reportes(req: HttpRequest):
                     pass
             except:
                 return render(req, "error.html")
+            
+def bienvenida_reportes(req: HttpRequest):
+    context = {}
+    return render(req, "bienvenida_reportes.html", context)
