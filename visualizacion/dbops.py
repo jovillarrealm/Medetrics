@@ -1,32 +1,36 @@
 from pymongo.database import Database
-from pymongo.cursor import Cursor
+from pymongo.command_cursor import CommandCursor
 from reportes.mongo_data import get_db
 
 
 def get_reports(
-    query: dict[str] = {}, db: Database = get_db(), collection: str = "reportes"
-) -> Cursor:
+    query: dict | None = None,
+    db: Database = get_db(),
+    collection: str = "reportes",
+) -> CommandCursor:
     # reports = db[collection].find(filter=query, limit=100)
-    reports = db[collection].aggregate(
-        [
-            {
-                "$group": {
-                    "_id": {"E": "$disease", "B": "$barrio", "M": "$municipio"},
-                    "casos_E_por_lugar": {"$sum": 1},
-                }
-            },
-            {
-                "$project": {
-                    "disease": "$_id.E",
-                    "municipio": "$_id.M",
-                    "barrio": "$_id.B",
-                    "casos": "$casos_E_por_lugar",
-                }
-            },
-            {"$sort": {"disease": 1, "casos": -1, "municipio": 1, "barrio": 1}},
-        ]
-    )
-    return reports
+
+    pipeline = [
+        {
+            "$group": {
+                "_id": {"E": "$disease", "B": "$barrio", "M": "$municipio"},
+                "casos_E_por_lugar": {"$sum": 1},
+            }
+        },
+        {
+            "$project": {
+                "disease": "$_id.E",
+                "municipio": "$_id.M",
+                "barrio": "$_id.B",
+                "casos": "$casos_E_por_lugar",
+            }
+        },
+        {"$sort": {"disease": 1, "casos": -1, "municipio": 1, "barrio": 1}},
+    ]
+    if query:
+        pipeline = [{"$match": query}] + pipeline
+
+    return db[collection].aggregate(pipeline)
 
 
 def get_pipeline():

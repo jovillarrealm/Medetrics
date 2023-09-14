@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title> Envío Fallido </title>
+{% endblock title %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+      Este reporte no está siendo bien diligenciado
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Muchas gracias por el esfuerzo de diligenciar el reporte, pero hubo un campo mal llenado</h5>
+      <p class="card-text">El problema es de su lado, por favor devuélvase y continúe pero bien </p>
+      <a href="#" onclick="history.go(-1)" class="btn btn-primary">Ah, vea ¯\_(ツ)_/¯</a>
+
+    </div>
+  </div>
+{% endblock content %}

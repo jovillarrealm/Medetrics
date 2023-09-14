@@ -22,10 +22,10 @@ def reportes(req: HttpRequest):
                 return render(req, "user_error.html")
             elif form_data.get("municipio") == "Municipios":
                 return render(req, "user_error.html")
-            elif form_data.get("Barrio") == "Barrios":
+            elif form_data.get("barrio") == "Barrios":
                 return render(req, "user_error.html")
             #print(form_data, type(form))
-            form_data["diagnosis_date"] = datetime.combine(form_data["diagnosis_date"],datetime.min.time())
+            form_data['diagnosis_date'] = datetime.combine(form_data['diagnosis_date'], datetime.min.time())
             try:
                 if send_report(form_data):
                     return render(req, "gracias.html")
