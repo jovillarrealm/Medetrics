@@ -15,7 +15,7 @@ def get_mongo_credentials():
     Esta función lee ese json y retorna la URI para conectar a Mongo.
     Para no andar dependiendo de leer un archivo cada vez que se va a usar esta URI entonces también se
     lrucachea el resultado para no ser descarados d=====(￣▽￣*)b"""
-    with open(BASE_DIR / "reportes" / "mongo.json") as mongo_data:
+    with open(BASE_DIR / "persistencia" / "mongo.json") as mongo_data:
         from json import load as jload
 
         credentials = jload(mongo_data)

@@ -1,6 +1,6 @@
 from pymongo.database import Database
 from pymongo.command_cursor import CommandCursor
-from reportes.mongo_data import get_db
+from persistencia.mongo_data import get_db
 
 
 def get_reports(

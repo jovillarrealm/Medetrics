@@ -1,5 +1,5 @@
 from pymongo.database import Database
-from reportes.mongo_data import get_db
+from persistencia.mongo_data import get_db
 import functools
 
 
@@ -11,17 +11,14 @@ def send_report(
     return reported
 
 
+# TODO Reemplazar con datos de DIVIPOLA
 @functools.lru_cache(maxsize=1)
 def get_input_data(db: Database = get_db(), collection: str = "mock_data"):
     curse = db[collection].find_one()
     pack = lambda field: (field, field)
-    packlist = lambda a, b, c: [
-        list(map(pack, a)),
-        list(map(pack, b)),
-        list(map(pack, c)),
-    ]
-    disease = ["Enfermedades"]+curse["disease"]
-    municipios = ["Municipios"]+curse["municipios"]
-    barrios = ["Barrios"]+curse["medellin_barrios"]
-    result =  packlist(disease, municipios, barrios)
+    packlist = lambda thing: [list(map(pack, i)) for i in thing]
+    disease = ["Enfermedades"] + curse["disease"]
+    municipios = ["Municipios"] + curse["municipios"]
+    barrios = ["Barrios"] + curse["medellin_barrios"]
+    result = packlist((disease, municipios, barrios))
     return result

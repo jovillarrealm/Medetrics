@@ -2,7 +2,7 @@ from collections.abc import Mapping
 from django import forms
 from django.forms import ModelForm
 import datetime
-from .dbops import get_input_data
+from persistencia.reportes_dbops import get_input_data
 
 mock_data = get_input_data()
 

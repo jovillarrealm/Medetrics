@@ -2,9 +2,12 @@ from django.shortcuts import render
 from .models import Visualizacion
 from django.http import HttpRequest
 from .forms import QueryForm
-from .dbops import get_reports
+
 from datetime import datetime
+from persistencia.visualizacion_dbops import get_reports
+
 # Create your views here.
+
 def visualizacion(request:HttpRequest):
     disease, municipio, barrio = "disease", "municipio", "barrio"
     visualizacions = Visualizacion.objects.all().order_by('-date')
@@ -34,12 +37,12 @@ def visualizacion(request:HttpRequest):
                 #return render(request, "user_error.html")
             
             reports = tuple(get_reports(match_stage))
-            try:
+            """try:
                 pass
             except:
-                pass
+                pass"""
             context = {"query_form": form,
-                    'visualizacions':visualizacions,
+                    "visualizacions":visualizacions,
                     "reports": reports}
             return render(request, 'visualizacion.html', context)
     

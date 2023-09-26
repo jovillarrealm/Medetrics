@@ -4,7 +4,7 @@ from django.forms import ModelForm
 import datetime
 
 
-from reportes.dbops import get_input_data
+from persistencia.reportes_dbops import get_input_data
 
 mock_data = get_input_data()
 

@@ -4,7 +4,7 @@ from reportes.forms import ReportForm
 
 from datetime import datetime
 
-from reportes.dbops  import send_report
+from persistencia.reportes_dbops  import send_report
 from typing import Any
 
 

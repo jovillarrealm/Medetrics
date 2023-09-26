@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "inicio",
     "login",
     "signup",
+    "persistencia",
+    "exterior_data",
 ]
 
 MIDDLEWARE = [
