@@ -33,14 +33,22 @@ def get_reports(
     return db[collection].aggregate(pipeline)
 
 
-def get_pipeline():
-    pass
+import functools
+
+@functools.lru_cache(maxsize=1)
+def get_departamentos():
+    """Departamentos soportados
+
+    Returns:
+       tuple[str]: Departamentos de bolivar
+    """
+    return tuple(get_db()["places"].distinct("departamento"))
 
 
 class Aggregate:
     def __init__(self) -> None:
-        self.match: dict = None
-        self.group: dict = None
+        self.match: dict = {}
+        self.group: dict = {}
         self.stage_n: list[dict] = []
 
     def setMatch(self, match_stage: dict):
@@ -51,6 +59,8 @@ class Aggregate:
 
     def setStage(self, stage: dict):
         self.stage_n.append(stage)
+
+
 
 
 class QueryBuilder:

@@ -4,7 +4,7 @@ from django.http import HttpRequest
 from .forms import QueryForm
 
 from datetime import datetime
-from persistencia.visualizacion_dbops import get_reports
+from persistencia.visualizacion_dbops import get_reports, get_departamentos
 
 # Create your views here.
 
@@ -14,8 +14,12 @@ def visualizacion(request:HttpRequest):
     if request.method == "GET":
         form = QueryForm()
         reports = tuple(get_reports())
+        #print(form)
+        departamentos = get_departamentos()
+        print(departamentos)
         context = {"query_form": form,
                    'visualizacions':visualizacions,
+                   'departamentos':departamentos,
                    "reports": reports}
         return render(request, 'visualizacion.html', context)
         #return render(req, "reporte.html", context)
@@ -24,7 +28,7 @@ def visualizacion(request:HttpRequest):
         if form.is_valid():
             form_data: dict = form.cleaned_data
             form_data['diagnosis_date'] = datetime.combine(form_data['diagnosis_date'], datetime.min.time())
-            #print(form_data)
+            print(form_data)
             match_stage = {}
             if form_data.get(disease) not in ["Enfermedades", "Enfermedad"]:
                 match_stage[disease] = form_data.get(disease)
@@ -41,8 +45,38 @@ def visualizacion(request:HttpRequest):
                 pass
             except:
                 pass"""
+            
             context = {"query_form": form,
                     "visualizacions":visualizacions,
                     "reports": reports}
             return render(request, 'visualizacion.html', context)
     
+from django.http import JsonResponse
+from persistencia.mongo_data import get_db
+
+def get_departamento_ciudad_barrio(request):
+    departamento = request.GET.get('departamento')
+    ciudad = request.GET.get('ciudad')
+    barrio = request.GET.get('barrio')
+
+    collection = get_db()["places"]
+
+    if departamento:
+        ciudades = collection.find({'departamento': departamento}, {'municipio': 1})
+        ciudades = [ciudad['ciudad'] for ciudad in ciudades]
+    else:
+        ciudades = []
+
+    if ciudad:
+        barrios = collection.find({'municipio': ciudad}, {'centro_poblado': 1})
+        barrios = [barrio['barrio'] for barrio in barrios]
+    else:
+        barrios = []
+
+    response = {
+        'departamento': departamento,
+        'ciudades': ciudades,
+        'barrios': barrios
+    }
+    print(response)
+    return JsonResponse(response)
