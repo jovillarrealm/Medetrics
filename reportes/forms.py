@@ -3,13 +3,8 @@ from django import forms
 from django.forms import ModelForm
 import datetime
 from persistencia.reportes_dbops import get_input_data
-
-mock_data = get_input_data()
-
-enfermedades = mock_data[0]
-municipios = mock_data[1]
-barrios = mock_data[2]
-
+pack = lambda li: ((field, field) for field in li)
+sexo = pack(["Sexo","F", "M"])
 
 class BootstrapForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -27,10 +22,12 @@ class BootstrapForm(forms.Form):
 
 # Heredar de BootstrapForm permite usar los widgets de html de bootstrap en vez de los de django :3
 class ReportForm(BootstrapForm):
-    disease = forms.ChoiceField(choices=enfermedades, label="Enfermedad")
-    municipio = forms.ChoiceField(choices=municipios, label="Municipio")
+    disease = forms.CharField(label="Enfermedad")
+    municipio = forms.CharField( label="Municipio")
     # municipio = forms.ChoiceField(choices=municipios ,label="Municipio",widget=forms.Select(attrs={'class': 'form-control'}))
-    barrio = forms.ChoiceField(choices=barrios, label="Barrio")
+    barrio = forms.CharField( label="Barrio")
+    sexo_paciente = forms.ChoiceField(choices=sexo, label="Sexo Paciente")
+    edad_paciente = forms.IntegerField(label="Edad Paciente")
     # barrio = forms.ChoiceField(choices=barrios ,label="Barrio",widget=forms.Select(attrs={'class': 'form-control'}))
     diagnosis_place = forms.CharField(label="Lugar de diagnóstico")
     diagnosis_date = forms.DateField(initial=datetime.date.today().strftime("%Y-%m-%d"))

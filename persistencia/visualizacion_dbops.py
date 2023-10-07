@@ -14,7 +14,7 @@ def get_reports(
         {
             "$group": {
                 "_id": {"E": "$disease", "B": "$barrio", "M": "$municipio"},
-                "casos_E_por_lugar": {"$sum": 1},
+                "E_por_lugar": {"$sum": 1},
             }
         },
         {
@@ -22,7 +22,7 @@ def get_reports(
                 "disease": "$_id.E",
                 "municipio": "$_id.M",
                 "barrio": "$_id.B",
-                "casos": "$casos_E_por_lugar",
+                "casos": "$E_por_lugar",
             }
         },
         {"$sort": {"disease": 1, "casos": -1, "municipio": 1, "barrio": 1}},

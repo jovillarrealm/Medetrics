@@ -8,9 +8,7 @@ from persistencia.reportes_dbops import get_input_data
 
 mock_data = get_input_data()
 
-enfermedades = mock_data[0]
-municipios = mock_data[1]
-barrios= mock_data[2]
+enfermedades, municipios, barrios = mock_data
 
 
 

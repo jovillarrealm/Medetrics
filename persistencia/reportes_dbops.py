@@ -11,22 +11,14 @@ def send_report(
     return reported
 
 
-# TODO Reemplazar con datos de DIVIPOLA
-@functools.lru_cache(maxsize=1)
-def get_input_data(db: Database = get_db(), collection: str = "mock_data"):
-    curse = db[collection].find_one()
-    pack = lambda field: (field, field)
-    packlist = lambda thing: [list(map(pack, i)) for i in thing]
-    if curse:
-        disease = ["Enfermedades"] + curse["disease"]
-        municipios = ["Municipios"] + curse["municipios"]
-        barrios = ["Barrios"] + curse["medellin_barrios"]
-    else:
-        disease = ["Enfermedades"]
-        municipios = ["Municipios"]
-        barrios = ["Barrios"]
-    result = packlist((disease, municipios, barrios))
-    return result
+def get_input_data(db: Database = get_db(), collection: str = "reportes"):
+    enfermedades = ["Enfermedades"]+ db[collection].distinct("disease")
+    municipio = ["Municipio"]+ db[collection].distinct("municipio")
+    barrio = ["Barrio"]+ db[collection].distinct("barrio")
+    pack = lambda li: ((field, field) for field in li)
+    listpack= lambda li: (pack(i) for i in li)
+    return listpack((enfermedades, municipio, barrio))
+
 
 
 # TODO Reemplazar con datos de DIVIPOLA
