@@ -5,7 +5,7 @@ from .forms import QueryForm
 
 from datetime import datetime
 from persistencia.visualizacion_dbops import get_reports, get_departamentos
-
+from exterior_data.covid_data import chart_edad
 # Create your views here.
 
 def visualizacion(request:HttpRequest):
@@ -17,10 +17,11 @@ def visualizacion(request:HttpRequest):
         #print(form)
         departamentos = get_departamentos()
         print(departamentos)
+        plot_div = chart_edad()
         context = {"query_form": form,
-                   'visualizacions':visualizacions,
-                   'departamentos':departamentos,
-                   "reports": reports}
+                "visualizacions":visualizacions,
+                "reports": reports,
+                "plot_div": plot_div}
         return render(request, 'visualizacion.html', context)
         #return render(req, "reporte.html", context)
     elif request.method == "POST":
@@ -46,9 +47,11 @@ def visualizacion(request:HttpRequest):
             except:
                 pass"""
             
+            plot_div = chart_edad()
             context = {"query_form": form,
                     "visualizacions":visualizacions,
-                    "reports": reports}
+                    "reports": reports,
+                    "plot_div": plot_div}
             return render(request, 'visualizacion.html', context)
     
 from django.http import JsonResponse
