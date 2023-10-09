@@ -5,3 +5,4 @@
 .vscode/
 .venv/
 exterior_data/socratica_secrets.json
+persistencia/mongo.json
