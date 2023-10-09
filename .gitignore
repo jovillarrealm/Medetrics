@@ -4,4 +4,4 @@
 
 .vscode/
 .venv/
-exterior_data/secrets.json
+exterior_data/socratica_secrets.json
