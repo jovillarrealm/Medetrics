@@ -49,7 +49,7 @@ def chart_edad(results_df:DataFrame= results_df):
     fig = px.histogram(results_df, x='edad', color='sexo', barmode='group')
 
     # Customize the plot
-    fig.update_layout(title='Distribución de edades de casos de COVID-19 en Cali', xaxis_title='Edad', yaxis_title='Número de casos')
+    fig.update_layout(title='Distribución de edades de casos de COVID-19', xaxis_title='Edad', yaxis_title='Número de casos')
 
     # Display the plot
     plot_div = opy.plot(fig, auto_open=False, output_type='div')
@@ -57,5 +57,14 @@ def chart_edad(results_df:DataFrame= results_df):
     #fig.show()
     return plot_div
 
-def chart_sexo(results_df:DataFrame= results_df):
-    pass
+def chart_lugar(results_df:DataFrame= results_df):
+    fig = px.histogram(results_df, x='edad', color='sexo', barmode='group')
+
+    # Customize the plot
+    fig.update_layout(title='Distribución de edades de casos de COVID-19', xaxis_title='Edad', yaxis_title='Número de casos')
+
+    # Display the plot
+    plot_div = opy.plot(fig, auto_open=False, output_type='div')
+
+    #fig.show()
+    return plot_div
