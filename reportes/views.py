@@ -25,7 +25,9 @@ def reportes(req: HttpRequest):
             elif form_data.get("barrio") == "Barrios":
                 return render(req, "user_error.html")
             #print(form_data, type(form))
-            form_data['diagnosis_date'] = datetime.combine(form_data['diagnosis_date'], datetime.min.time())
+            form_data['diagnosis_date'] = datetime.combine(form_data['diagnosis_date'], datetime.min.time())    
+            form_data['edad_paciente'] = form.cleaned_data['edad_paciente']
+            form_data['sexo_paciente'] = form.cleaned_data['sexo_paciente']
             try:
                 if send_report(form_data):
                     return render(req, "gracias.html")
