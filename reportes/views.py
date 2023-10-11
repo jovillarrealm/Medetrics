@@ -37,8 +37,12 @@ def reportes(req: HttpRequest):
             except:
                 return render(req, "error.html")
         else:
-            print("WOW")
             return render(req, "user_error.html")
+        
 def bienvenida_reportes(req: HttpRequest):
     context = {}
     return render(req, "bienvenida_reportes.html", context)
+
+
+
+

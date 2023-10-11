@@ -17,11 +17,11 @@ def visualizacion(request:HttpRequest):
         #print(form)
         departamentos = get_departamentos()
         print(departamentos)
-        plot_div = chart_edad()
+        
         context = {"query_form": form,
                 "visualizacions":visualizacions,
                 "reports": reports,
-                "plot_div": plot_div}
+                }
         return render(request, 'visualizacion.html', context)
         #return render(req, "reporte.html", context)
     elif request.method == "POST":
@@ -47,11 +47,11 @@ def visualizacion(request:HttpRequest):
             except:
                 pass"""
             
-            plot_div = chart_edad()
+            
             context = {"query_form": form,
                     "visualizacions":visualizacions,
                     "reports": reports,
-                    "plot_div": plot_div}
+                    }
             return render(request, 'visualizacion.html', context)
     
 from django.http import JsonResponse
@@ -83,3 +83,14 @@ def get_departamento_ciudad_barrio(request):
     }
     print(response)
     return JsonResponse(response)
+
+def bienvenida_visualizaciones(req: HttpRequest):
+    context = {}
+    return render(req, "bienvenida_visualizaciones.html", context)
+
+def visualiza_covid(req: HttpRequest):
+    plot_divs = [chart_edad()]
+
+    context = {"plotdivs": plot_divs}
+
+    return render(req, "visualiza_covid.html", context)
