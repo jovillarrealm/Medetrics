@@ -5,7 +5,7 @@ from .forms import QueryForm
 
 from datetime import datetime
 from persistencia.visualizacion_dbops import get_reports, get_departamentos
-from exterior_data.covid_data import chart_edad
+
 # Create your views here.
 
 def visualizacion(request:HttpRequest):
@@ -79,6 +79,9 @@ def get_departamento_ciudad_barrio(request):
     print(response)
     return JsonResponse(response)
 
+from exterior_data.covid_data import chart_edad
+from exterior_data import med_data
+
 def bienvenida_visualizaciones(req: HttpRequest):
     context = {}
     return render(req, "bienvenida_visualizaciones.html", context)
@@ -91,12 +94,11 @@ def visualiza_covid(req: HttpRequest):
     return render(req, "visualiza_covid.html", context)
 
 def visualiza_dengue(req: HttpRequest):
-    from exterior_data import med_data
-    plot_divs = [med_data.chart_dengue()]
-
+    plot_divs = med_data.chart_dengue()
     context = {"plotdivs": plot_divs}
     return render(req, "visualiza_dengue.html", context)
 
 def visualiza_VIH(req: HttpRequest):
-    context = {}
+    plot_divs = med_data.chart_vih()
+    context = {"plotdivs": plot_divs}
     return render(req, "visualiza_VIH.html", context)

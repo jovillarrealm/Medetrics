@@ -12,9 +12,8 @@ def get_creds(file:str):
 
     #from Medetrics.settings import BASE_DIR
     from json import load as jload
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    #with open(BASE_DIR / "exterior_data" / file) as socratica_secrets:
-    with open(BASE_DIR / "exterior_data" / file) as socratica_secrets:
+    BASE_DIR = Path(__file__).resolve().parent
+    with open(BASE_DIR / file) as socratica_secrets:
         credentials = jload(socratica_secrets)
         return credentials
 

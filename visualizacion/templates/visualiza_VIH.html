@@ -40,7 +40,10 @@
             </a>
         </div>
     </div>
-
+    {% for plot_div in plotdivs %}
+        {{ plot_div|safe }}
+    {% endfor %}
+    
     {% endblock content %}
 </body>
 
