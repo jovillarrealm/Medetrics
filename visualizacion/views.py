@@ -29,23 +29,18 @@ def visualizacion(request:HttpRequest):
         if form.is_valid():
             form_data: dict = form.cleaned_data
             form_data['diagnosis_date'] = datetime.combine(form_data['diagnosis_date'], datetime.min.time())
-            print(form_data)
             match_stage = {}
             if form_data.get(disease) not in ["Enfermedades", "Enfermedad"]:
                 match_stage[disease] = form_data.get(disease)
                 #return render(request, "user_error.html")
-            if form_data.get(municipio) != "Municipios":
+            if form_data.get(municipio) != "Municipio":
                 match_stage[municipio] = form_data.get(municipio)
                 #return render(request, "user_error.html")
-            if form_data.get(barrio) != "Barrios":
+            if form_data.get(barrio) != "Barrio":
                 match_stage[barrio] = form_data.get(barrio)
                 #return render(request, "user_error.html")
             
             reports = tuple(get_reports(match_stage))
-            """try:
-                pass
-            except:
-                pass"""
             
             
             context = {"query_form": form,
@@ -94,3 +89,14 @@ def visualiza_covid(req: HttpRequest):
     context = {"plotdivs": plot_divs}
 
     return render(req, "visualiza_covid.html", context)
+
+def visualiza_dengue(req: HttpRequest):
+    from exterior_data import med_data
+    plot_divs = [med_data.chart_dengue()]
+
+    context = {"plotdivs": plot_divs}
+    return render(req, "visualiza_dengue.html", context)
+
+def visualiza_VIH(req: HttpRequest):
+    context = {}
+    return render(req, "visualiza_VIH.html", context)

@@ -17,6 +17,26 @@
 <body>
     {% block content %}
     {% load static %}
+
+    <div class="seccion-azul"
+    style="background-color: #1F3777; color: white; text-align: left;  width: 131.63%; height: 300px; left: -205px; right: 0; bottom: -60px; padding-top: 0px; padding-bottom: 0px; padding-left: 138px; padding-right: 254px; position: relative;">
+    <img src="https://media.discordapp.net/attachments/1136705042410381404/1161786029154508810/image.png?ex=6539908e&is=65271b8e&hm=44921d5cf13d887891db8ffcecaa7a78eb0101bfb1669a256453572341cd6447&="
+        alt="Imagen" style="position: relative; width: 1000; right: -350px; bottom: 120px; top: 3px;">
+    <h1
+        style="font-size: 50px; font-weight: bold; margin: 0; padding: 0; position: absolute; top: 20%; left: 844px;">
+        Analiza los casos</h1>
+    <p
+        style="font-size: 23px; line-height: 1; text-align: center; padding-top: 20px; font-weight: lighter; position: absolute; top: 41%; left: 48%; width: 460px; height: 79px;">
+        <!-- Tu texto aquí -->
+        Analiza los casos activos reportados por nuestros usuarios, realizando búsquedas por enfermedad, municipio o barrio
+    </p>
+    <div style="position: absolute; left: 55%; top: 79%;">
+        <a href="/visualizacion/bienvenida/">
+            <button class="btn btn-primary" style="width: 200px; height: 50px; font-weight: bold; font-size: 20px;">Regresar</button>
+        </a>
+    </div>
+</div>
+
     <script >
         $(document).ready(function() {
             $('select[name="departamento"]').on('change', function() {
@@ -59,10 +79,9 @@
         });
     </script>
 
-    <div class="container mt-4">
+    <div class="col-md-6" style="width: 592px; height: 530px; margin-top: 90px; margin-bottom: 100px;">
         <div class="row">
             <!-- Columna izquierda para la tabla 1 y los campos de búsqueda -->
-            <div class="col-md-6">
                 <!-- Lista desplegable para seleccionar el criterio de búsqueda en la tabla 1 -->
                 
                 <form method="post">
@@ -173,14 +192,6 @@
                     </tbody>
                 </table>
             -->
-            </div>
-            
-            <!-- Columna derecha para la imagen -->
-            <div class="col-md-6">
-                <img src="{% static 'images/casos.png' %}" alt="Imagen" class="img-fluid">
-            </div>
-        </div>
-    </div>
 
     
     {% endblock content %}
