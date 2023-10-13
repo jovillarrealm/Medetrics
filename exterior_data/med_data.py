@@ -89,7 +89,36 @@ def create_histogram(df:DataFrame, ordered_var: str, color:str, texts):
         xaxis_title=x,
         yaxis_title=y,
     )
-    fig.show()
+    # Display the plot
+    plot_div = opy.plot(fig, auto_open=False, output_type="div")
+
+    return plot_div
+
+
+def create_interactive_histogram(df:DataFrame, ordered_var: str, color:str, texts):
+    # Sort the DataFrame by 'edad'
+    df = df.sort_values(by=ordered_var)
+
+    # Create a custom ordering for the 'edad' column
+    uniques_var = df[ordered_var].unique()
+    var_order = sorted(uniques_var)
+
+    # Create a histogram
+    fig = px.histogram(
+        df,
+        x=ordered_var,
+        color=color,
+        category_orders={ordered_var: var_order},
+        barmode="group",
+    )
+    title, x, y = texts
+    print(texts)
+    # Customize the plot
+    fig.update_layout(
+        title=title,
+        xaxis_title=x,
+        yaxis_title=y,
+    )
     # Display the plot
     plot_div = opy.plot(fig, auto_open=False, output_type="div")
 
