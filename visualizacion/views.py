@@ -88,17 +88,43 @@ def bienvenida_visualizaciones(req: HttpRequest):
 
 def visualiza_covid(req: HttpRequest):
     plot_divs = [chart_edad()]
-
-    context = {"plotdivs": plot_divs}
-
+    enfermedad = "COVID-19"
+    context = {"plotdivs": plot_divs, "enfermedad": enfermedad}
     return render(req, "visualiza_covid.html", context)
 
 def visualiza_dengue(req: HttpRequest):
     plot_divs = med_data.chart_dengue()
-    context = {"plotdivs": plot_divs}
-    return render(req, "visualiza_dengue.html", context)
+    enfermedad = "Dengue"
+    context = {"plotdivs": plot_divs, "enfermedad": enfermedad}
+    return render(req, "visualiza_enfermedad.html", context)
 
 def visualiza_VIH(req: HttpRequest):
     plot_divs = med_data.chart_vih()
-    context = {"plotdivs": plot_divs}
-    return render(req, "visualiza_VIH.html", context)
+    enfermedad = "VIH"
+    context = {"plotdivs": plot_divs, "enfermedad": enfermedad}
+    return render(req, "visualiza_enfermedad.html", context)
+
+def visualiza_viruela_sim(req: HttpRequest):
+    plot_divs = med_data.chart_viruela_sim()
+    enfermedad = "Viruela símica"
+    context = {"plotdivs": plot_divs, "enfermedad": enfermedad}
+    return render(req, "visualiza_enfermedad.html", context)
+
+def visualiza_meningitis(req: HttpRequest):
+    plot_divs = med_data.chart_meningitis()
+    enfermedad = "Meningistis por Haemophilus Influenzae"
+    context = {"plotdivs": plot_divs, "enfermedad": enfermedad}
+    return render(req, "visualiza_enfermedad.html", context)
+
+def visualiza_enfermedad(req: HttpRequest, enf:str):
+    datos = {
+        "VIH":(med_data.chart_vih, "VIH"),
+        "meningitis_influenzae": (med_data.chart_meningitis, "Meningitis por Haemophilus Influenzae"),
+        "dengue":(med_data.chart_dengue,"Dengue" ),
+        "viruela_simica":(med_data.chart_viruela_sim, "Viruela símica"),
+        #"covid": (chart_edad, "COVID-19")
+        }
+    plots, enfermedad = datos[enf]
+    plot_divs= plots()
+    context = {"plotdivs": plot_divs, "enfermedad": enfermedad}
+    return render(req, "visualiza_enfermedad.html", context)

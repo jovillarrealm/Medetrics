@@ -11,61 +11,177 @@ from pyarrow import feather
 
 dengue_id = "Dengue"
 meningitis_id = "Meningitis por haemophilus influenzae"
-viruela_simica = "Casos positivos de Viruela símica"
+viruela_simica_id = "Casos positivos de Viruela símica"
 vih_id = "VIH - SIDA"
+
 
 def chart_dengue():
     df = get_dataset(dengue_id)
-    # Sort the DataFrame by 'edad'
-    df = df.sort_values(by="edad_")
+    
+    v = "edad_"
+    color = "sexo_"
+    title = f"Distribución de edad en Dengue ({df.shape[0]} casos)"
+    x_axis = "Edad"
+    y_axis = "Número de casos"
+    textos = title, x_axis, y_axis
+    edad_plot_div = create_histogram(df, v, color, textos)
 
-    # Create a custom ordering for the 'edad' column
-    unique_edades = df["edad_"].unique()
-    edad_order = sorted(unique_edades)
+    v = "year_"
+    color = "sexo_"
+    title = f"Distribución de número de casos por año Dengue ({df.shape[0]} casos)"
+    x_axis = "Año de diagnósis"
+    y_axis = "Número de casos"
+    textos = title, x_axis, y_axis
+    ano_plot_div = create_histogram(df, v, color, textos)
+        
+    v = "comuna"
+    color = "sexo_"
+    title = f"Distribución de número de casos por comuna {meningitis_id} ({df.shape[0]} casos)"
+    x_axis = "Comuna"
+    y_axis = "Número de casos"
+    textos = title, x_axis, y_axis
+    comuna_plot_div = create_histogram(df, v, color, textos)
 
-    # Create a histogram
-    fig = px.histogram(
-        df,
-        x="edad_",
-        color="sexo_",
-        category_orders={"edad_": edad_order},
-        barmode="group",
-    )
+    v = "pac_hos_"
+    color = "sexo_"
+    title = f"Distribución de pacientes hospitalizados {meningitis_id} ({df.shape[0]} casos)"
+    x_axis = "Pacientes hospitalizados"
+    y_axis = "Número de casos"
+    replace_value = lambda pac: "Hospitalizado" if pac == 1 else "No hospitalizado"
+    df[v] = df[v].apply(replace_value)
+    textos = title, x_axis, y_axis
+    hospitalizado_plot_div = create_histogram(df, v, color, textos)
 
-    # Customize the plot
-    fig.update_layout(
-        title=f"Distribución de edades de casos de Dengue ({df.shape[0]} casos)",
-        xaxis_title="Edad",
-        yaxis_title="Número de casos",
-    )
-
-    # Display the plot
-    plot_div = opy.plot(fig, auto_open=False, output_type="div")
-    return plot_div
-
+    return edad_plot_div, ano_plot_div, comuna_plot_div, hospitalizado_plot_div
 
 def chart_vih():
     df = get_dataset(vih_id)
+
     v = "edad_"
-    color="sexo_"
+    color = "sexo_"
     title = f"Distribución de edad en VIH ({df.shape[0]} casos)"
     x_axis = "Edad"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
-    edad_plot_div = create_histogram(df,v,color,textos)
+    edad_plot_div = create_histogram(df, v, color, textos)
 
     # Sort the DataFrame by 'año'
     v = "año"
-    color="sexo_"
-    title=f"Distribución de número de casos por año VIH ({df.shape[0]} casos)"
-    xaxis_title="Año de diagnósis"
-    yaxis_title="Número de casos"
+    color = "sexo_"
+    title = f"Distribución de número de casos por año VIH ({df.shape[0]} casos)"
+    x_axis = "Año de diagnósis"
+    y_axis = "Número de casos"
     textos = title, x_axis, y_axis
-    ano_plot_div= create_histogram(df,v,color, textos)
-    return edad_plot_div, ano_plot_div
+    ano_plot_div = create_histogram(df, v, color, textos)
+
+    v = "estrato_"
+    ef = df[df[v] != 999]
+    color = "sexo_"
+    title= (
+        f"Número de casos por Estrato en VIH ({df.shape[0]} casos)"
+    )
+    x_axis = "Estrato"
+    y_axis = "Número de casos"
+    textos = title, x_axis, y_axis
+    estrato_plot_div = create_histogram(ef, v, color, textos)
+
+    v = "nombre_comuna"
+    color = "sexo_"
+    title = f"Distribución de número de casos por comuna {meningitis_id} ({df.shape[0]} casos)"
+    x_axis = "Comuna"
+    y_axis = "Número de casos"
+    textos = title, x_axis, y_axis
+    comuna_plot_div = create_histogram(df, v, color, textos)
+    
+    return edad_plot_div, ano_plot_div, estrato_plot_div, comuna_plot_div
 
 
-def create_histogram(df:DataFrame, ordered_var: str, color:str, texts):
+def chart_viruela_sim():
+    df = get_dataset(viruela_simica_id)
+    
+    v = "edad"
+    color = "sexo"
+    title = f"Distribución de edad en Viruela Símica ({df.shape[0]} casos)"
+    x_axis = "Edad"
+    y_axis = "Número de casos"
+    textos = title, x_axis, y_axis
+    edad_plot_div = create_histogram(df, v, color, textos)
+
+    # Sort the DataFrame by 'año'
+    v = "a_o"
+    color = "sexo"
+    title = (
+        f"Distribución de número de casos por año Viruela Símica ({df.shape[0]} casos)"
+    )
+    x_axis = "Año de diagnósis"
+    y_axis = "Número de casos"
+    textos = title, x_axis, y_axis
+    ano_plot_div = create_histogram(df, v, color, textos)
+
+    ef = df[df['estrato'] != 999]
+    v = "estrato"
+    color = "sexo"
+    title= (
+        f"Número de casos por Estrato en Viruela Símica ({df.shape[0]} casos)"
+    )
+    x_axis = "Estrato"
+    y_axis = "Número de casos"
+    textos = title, x_axis, y_axis
+    estrato_plot_div = create_histogram(ef, v, color, textos)
+
+    v = "hospitalizacion"
+    color = "sexo"
+    title = f"Distribución de pacientes hospitalizados con Viruela Símica ({df.shape[0]} casos)"
+    x_axis = "Pacientes hospitalizados"
+    y_axis = "Número de casos"
+    replace_value = lambda pac: "Hospitalizado" if pac == 1 else "No hospitalizado"
+    df[v] = df[v].apply(replace_value)
+    textos = title, x_axis, y_axis
+    hospitalizado_plot_div = create_histogram(df, v, color, textos)
+
+    return edad_plot_div, ano_plot_div, estrato_plot_div, hospitalizado_plot_div
+
+
+def chart_meningitis():
+    df = get_dataset(meningitis_id)
+    v = "edad_"
+    color = "sexo_"
+    title = f"Distribución de edad en {meningitis_id} ({df.shape[0]} casos)"
+    x_axis = "Edad"
+    y_axis = "Número de casos"
+    textos = title, x_axis, y_axis
+    edad_plot_div = create_histogram(df, v, color, textos)
+
+    # Sort the DataFrame by 'año'
+    v = "year_"
+    color = "sexo_"
+    title = f"Distribución de número de casos por año en {meningitis_id} ({df.shape[0]} casos)"
+    x_axis = "Año de diagnósis"
+    y_axis = "Número de casos"
+    textos = title, x_axis, y_axis
+    ano_plot_div = create_histogram(df, v, color, textos)
+
+    v = "comuna"
+    color = "sexo_"
+    title = f"Distribución de número de casos por comuna {meningitis_id} ({df.shape[0]} casos)"
+    x_axis = "Comuna"
+    y_axis = "Número de casos"
+    textos = title, x_axis, y_axis
+    comuna_plot_div = create_histogram(df, v, color, textos)
+   
+    v = "pac_hos_"
+    color = "sexo_"
+    title = f"Distribución de pacientes hospitalizados {meningitis_id} ({df.shape[0]} casos)"
+    x_axis = "Pacientes hospitalizados"
+    y_axis = "Número de casos"
+    replace_value = lambda pac: "Hospitalizado" if pac == 1 else "No hospitalizado"
+    df[v] = df[v].apply(replace_value)
+    textos = title, x_axis, y_axis
+    hospitalizado_plot_div = create_histogram(df, v, color, textos)
+   
+    return edad_plot_div, ano_plot_div, hospitalizado_plot_div, comuna_plot_div 
+
+def create_histogram(df: DataFrame, ordered_var: str, color: str, texts):
     # Sort the DataFrame by 'edad'
     df = df.sort_values(by=ordered_var)
 
@@ -82,7 +198,6 @@ def create_histogram(df:DataFrame, ordered_var: str, color:str, texts):
         barmode="group",
     )
     title, x, y = texts
-    print(texts)
     # Customize the plot
     fig.update_layout(
         title=title,
@@ -95,34 +210,8 @@ def create_histogram(df:DataFrame, ordered_var: str, color:str, texts):
     return plot_div
 
 
-def create_interactive_histogram(df:DataFrame, ordered_var: str, color:str, texts):
-    # Sort the DataFrame by 'edad'
-    df = df.sort_values(by=ordered_var)
-
-    # Create a custom ordering for the 'edad' column
-    uniques_var = df[ordered_var].unique()
-    var_order = sorted(uniques_var)
-
-    # Create a histogram
-    fig = px.histogram(
-        df,
-        x=ordered_var,
-        color=color,
-        category_orders={ordered_var: var_order},
-        barmode="group",
-    )
-    title, x, y = texts
-    print(texts)
-    # Customize the plot
-    fig.update_layout(
-        title=title,
-        xaxis_title=x,
-        yaxis_title=y,
-    )
-    # Display the plot
-    plot_div = opy.plot(fig, auto_open=False, output_type="div")
-
-    return plot_div
+def create_interactive_histogram(df: DataFrame, ordered_var: str, color: str, texts):
+    pass
 
 
 def get_dataset(id):
@@ -132,10 +221,14 @@ def get_dataset(id):
         dengue_id: "sivigila_dengue",
         meningitis_id: "meningitis_por_haemophilus_influenzae",
         vih_id: "sivigila_vih",
-        viruela_simica: "casos_positivos_viruela_simica",
+        viruela_simica_id: "casos_positivos_viruela_simica",
     }
     file = enfermedades[id] + ".feather"
-    df: DataFrame = feather.read_feather(BASE_DIR / "datasets" / file)
+    try:
+        df: DataFrame = feather.read_feather(BASE_DIR / "datasets" / file)
+    except:
+        get_dataset_remote(id)
+        df: DataFrame = feather.read_feather(BASE_DIR / "datasets" / file)
     return df
 
 
@@ -169,10 +262,14 @@ def get_dataset_remote(id):
         last_modified_local = datetime.fromtimestamp(new_file_path.stat().st_mtime)
         if last_modified_remote > last_modified_local:
             # Si tenemos el archivo descargado y han actualizado los recursos, descargamos
+            print(
+                f"Se va a actualizar el recurso {file_name} que venía desde {last_modified_local} a {last_modified_remote}"
+            )
             download_file(url, file_name, new_file_path)
         else:
             print(f"No hay que hacer nada con {file_name}")
     else:
+        print(f"Se va a descargar el recurso {file_name}")
         download_file(url, file_name, new_file_path)
 
     new_feather_file = file_name.split(".")[0] + ".feather"
@@ -181,10 +278,12 @@ def get_dataset_remote(id):
     if new_feather_path.exists():
         last_modified_local = datetime.fromtimestamp(new_feather_path.stat().st_mtime)
         if last_modified_remote > last_modified_local:
+            print(f"Se va a actualizar el csv en {new_feather_file}")
             save_feather(new_file_path, new_feather_path)
         else:
             print(f" No hay que hacer nada con {new_feather_file}")
     else:
+        print(f"Se va a transformar el csv en {new_feather_file}")
         save_feather(new_file_path, new_feather_path)
     try:
         pass

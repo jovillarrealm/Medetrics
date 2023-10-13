@@ -7,6 +7,8 @@ from sodapy import Socrata
 import plotly.express as px
 import plotly.offline as opy
 from pandas import DataFrame
+from pyarrow import feather
+
 @functools.lru_cache(maxsize=1)
 def get_creds(file:str):
 
@@ -22,7 +24,7 @@ def get_creds(file:str):
 
 
 @functools.lru_cache(maxsize=1)
-def download_data(limit=50):
+def download_data(limit=25000):
     credentials = get_creds("socratica_secrets.json")
     # Unauthenticated client only works with public data sets. Note 'None'
     # in place of application token, and no username or password:
@@ -42,12 +44,31 @@ def download_data(limit=50):
     results_df['edad'] = results_df['edad'].astype("int")
     return results_df
 
-results_df = download_data()
+def download_feather():
+    df = download_data()
+    BASE_DIR = Path(__file__).resolve().parent
+    new_feather_file = "covid_data"+".feather"
+    new_feather_path: Path = BASE_DIR / "datasets" / new_feather_file
+    feather.write_feather(df=df, dest=new_feather_path)
+
+def get_dataset():
+    # Load .feather de
+    BASE_DIR = Path(__file__).resolve().parent
+    new_feather_file = "covid_data"+".feather"
+    try:
+        df: DataFrame = feather.read_feather(BASE_DIR / "datasets" / new_feather_file)
+        print(df)
+        print(df.dtypes)
+    except:
+        download_feather()
+        df: DataFrame = feather.read_feather(BASE_DIR / "datasets" / new_feather_file)
+    return df
+results_df = get_dataset()
 
 def chart_edad(results_df: DataFrame = results_df):
     # Sort the DataFrame by 'edad'
     results_df = results_df.sort_values(by='edad')
-
+    
     # Create a custom ordering for the 'edad' column
     unique_edades = results_df['edad'].unique()
     edad_order = sorted(unique_edades)
@@ -65,13 +86,4 @@ def chart_edad(results_df: DataFrame = results_df):
 
 
 def chart_lugar(results_df:DataFrame= results_df):
-    fig = px.histogram(results_df, x='edad', color='sexo', barmode='group')
-
-    # Customize the plot
-    fig.update_layout(title='Distribución de edades de casos de COVID-19', xaxis_title='Edad', yaxis_title='Número de casos')
-
-    # Display the plot
-    plot_div = opy.plot(fig, auto_open=False, output_type='div')
-
-    #fig.show()
-    return plot_div
+    pass
