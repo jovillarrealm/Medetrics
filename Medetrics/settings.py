@@ -63,7 +63,7 @@ ROOT_URLCONF = "Medetrics.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "medetrics/templates")],
+        "DIRS": [os.path.join(BASE_DIR, "Medetrics/templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
