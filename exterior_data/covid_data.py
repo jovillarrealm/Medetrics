@@ -1,14 +1,15 @@
 import functools
 from pathlib import Path
 
-
 import pandas as pd
 from sodapy import Socrata
 import plotly.express as px
 import plotly.offline as opy
 from pandas import DataFrame
 from pyarrow import feather
-
+from pyarrow import csv
+from datetime import datetime, date
+import pyarrow as pa
 @functools.lru_cache(maxsize=1)
 def get_creds(file:str):
 
@@ -23,8 +24,7 @@ def get_creds(file:str):
 
 
 
-@functools.lru_cache(maxsize=1)
-def download_data(limit=25000):
+def download_data(limit=50000):
     credentials = get_creds("socratica_secrets.json")
     # Unauthenticated client only works with public data sets. Note 'None'
     # in place of application token, and no username or password:
@@ -39,34 +39,47 @@ def download_data(limit=25000):
     # First 10 results, returned as JSON from API / converted to Python list of
     # dictionaries by sodapy.
     results = client.get("gt2j-8ykr", limit=limit, select="id_de_caso, fecha_de_notificaci_n, departamento_nom, ciudad_municipio_nom, edad, unidad_medida, sexo, fuente_tipo_contagio, ubicacion, estado, recuperado")
+    
     # Convert to pandas DataFrame
     results_df = pd.DataFrame.from_records(results)
-    results_df['edad'] = results_df['edad'].astype("int")
+    #results_df['edad'] = results_df['edad'].astype("uint8[pyarrow]")
+    
+    
+    #results_df = pa.
     return results_df
 
-def download_feather():
+
+@functools.lru_cache(maxsize=1)
+def download_feather(new_feather_path:Path, last_modified = None):
     df = download_data()
-    BASE_DIR = Path(__file__).resolve().parent
-    new_feather_file = "covid_data"+".feather"
-    new_feather_path: Path = BASE_DIR / "datasets" / new_feather_file
+    csv_path=new_feather_path.parent.parent/ "csv" / "covid_data.csv"
+    df.to_csv(csv_path)
+    df:DataFrame = csv.read_csv(csv_path)
     feather.write_feather(df=df, dest=new_feather_path)
+    return df
 
 def get_dataset():
     # Load .feather de
+    file = "covid_data"
+    new_feather_file = file + ".feather"
     BASE_DIR = Path(__file__).resolve().parent
-    new_feather_file = "covid_data"+".feather"
-    try:
-        df: DataFrame = feather.read_feather(BASE_DIR / "datasets" / new_feather_file)
-        print(df)
-        print(df.dtypes)
-    except:
-        download_feather()
-        df: DataFrame = feather.read_feather(BASE_DIR / "datasets" / new_feather_file)
+    new_feather_path = BASE_DIR / "datasets" / new_feather_file
+    if new_feather_path.is_file():
+        last_modified_local = datetime.fromtimestamp(new_feather_path.stat().st_mtime).date()
+        df: DataFrame = feather.read_feather(new_feather_path)
+        since = (date.today() - last_modified_local).days
+        if since > 1:
+            df = download_feather(new_feather_path, since)
+    else:
+        df = download_feather(new_feather_path)
+        print(f"Hubo que descargar archivos de covid en {new_feather_path}")
+        
     return df
-results_df = get_dataset()
 
-def chart_edad(results_df: DataFrame = results_df):
+
+def chart_edad():
     # Sort the DataFrame by 'edad'
+    results_df = get_dataset()
     results_df = results_df.sort_values(by='edad')
     
     # Create a custom ordering for the 'edad' column
@@ -85,5 +98,6 @@ def chart_edad(results_df: DataFrame = results_df):
     return plot_div
 
 
-def chart_lugar(results_df:DataFrame= results_df):
+def chart_lugar():
+    results_df = get_dataset()
     pass

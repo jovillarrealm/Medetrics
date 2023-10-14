@@ -1,0 +1,6 @@
+,id_de_caso,fecha_de_notificaci_n,departamento_nom,ciudad_municipio_nom,edad,unidad_medida,sexo,fuente_tipo_contagio,ubicacion,estado,recuperado
+0,1556979,2020-12-22 00:00:00,VALLE,CALI,67,1,F,Comunitaria,Casa,Leve,Recuperado
+1,1556980,2020-12-19 00:00:00,VALLE,CALI,66,1,F,Comunitaria,Casa,Leve,Recuperado
+2,1556981,2020-12-19 00:00:00,VALLE,CALI,68,1,F,Comunitaria,Casa,Leve,Recuperado
+3,1556982,2020-12-22 00:00:00,VALLE,CALI,74,1,F,Comunitaria,Fallecido,Fallecido,Fallecido
+4,1556983,2020-12-22 00:00:00,VALLE,CALI,65,1,F,Comunitaria,Casa,Leve,Recuperado

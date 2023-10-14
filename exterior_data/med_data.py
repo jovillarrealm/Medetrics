@@ -4,17 +4,17 @@ import requests
 import plotly.express as px
 import plotly.offline as opy
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, date
 from pyarrow import csv
 from pyarrow import feather
-
+import functools
 
 dengue_id = "Dengue"
 meningitis_id = "Meningitis por haemophilus influenzae"
 viruela_simica_id = "Casos positivos de Viruela símica"
 vih_id = "VIH - SIDA"
 
-
+@functools.lru_cache(maxsize=1)
 def chart_dengue():
     df = get_dataset(dengue_id)
     
@@ -23,6 +23,7 @@ def chart_dengue():
     title = f"Distribución de edad en Dengue ({df.shape[0]} casos)"
     x_axis = "Edad"
     y_axis = "Número de casos"
+    
     textos = title, x_axis, y_axis
     edad_plot_div = create_histogram(df, v, color, textos)
 
@@ -54,6 +55,7 @@ def chart_dengue():
 
     return edad_plot_div, ano_plot_div, comuna_plot_div, hospitalizado_plot_div
 
+@functools.lru_cache(maxsize=1)
 def chart_vih():
     df = get_dataset(vih_id)
 
@@ -96,6 +98,7 @@ def chart_vih():
     return edad_plot_div, ano_plot_div, estrato_plot_div, comuna_plot_div
 
 
+@functools.lru_cache(maxsize=1)
 def chart_viruela_sim():
     df = get_dataset(viruela_simica_id)
     
@@ -141,7 +144,7 @@ def chart_viruela_sim():
 
     return edad_plot_div, ano_plot_div, estrato_plot_div, hospitalizado_plot_div
 
-
+@functools.lru_cache(maxsize=1)
 def chart_meningitis():
     df = get_dataset(meningitis_id)
     v = "edad_"
@@ -253,13 +256,14 @@ def get_dataset_remote(id):
     file_name = url.split("/")[-1]
     last_modified_remote_str = resource_response["last_modified"].split(",")[1].lstrip()
     format_string = "%m/%d/%Y - %H:%M"
-    last_modified_remote = datetime.strptime(last_modified_remote_str, format_string)
+    last_modified_remote = datetime.strptime(last_modified_remote_str, format_string).date()
 
     BASE_DIR = Path(__file__).resolve().parent
     new_file_path: Path = BASE_DIR / "csv" / file_name
 
     if new_file_path.is_file():
-        last_modified_local = datetime.fromtimestamp(new_file_path.stat().st_mtime)
+        last_modified_local = datetime.fromtimestamp(new_file_path.stat().st_mtime).date()
+        
         if last_modified_remote > last_modified_local:
             # Si tenemos el archivo descargado y han actualizado los recursos, descargamos
             print(
