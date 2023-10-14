@@ -1,0 +1,33 @@
+
+
+.form-control {
+    height: 40px; /* Adjust the height as needed */
+}
+
+/* Darken the background color of form fields */
+.form-control {
+    background-color: #bfbfbf; /* Use your desired background color */
+    color: #000000; /* Set the text color to white or another suitable color */
+}
+
+.custom-footer {
+    background-color: #001A59;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    font-weight: normal;
+    /* Elimina position: absolute y width */
+    /* position: absolute; */
+    /* bottom: 0; */
+    width: 100%; /* Asegura que el ancho sea del 100% */
+    position: fixed; /* Fija el footer en la parte inferior de la ventana */
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Estilo para el cuerpo de la página para separar el contenido del footer */
+body {
+    margin-bottom: 60px; /* Ajusta el margen inferior para que el contenido no se solape con el footer */
+}
