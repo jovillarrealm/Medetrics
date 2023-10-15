@@ -29,7 +29,7 @@ def chart_dengue():
 
     v = "year_"
     color = "sexo_"
-    title = f"Distribución de número de casos por año Dengue ({df.shape[0]} casos)"
+    title = f"Distribución de número de casos de Dengue por año  ({df.shape[0]} casos)"
     x_axis = "Año de diagnósis"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -37,7 +37,7 @@ def chart_dengue():
         
     v = "comuna"
     color = "sexo_"
-    title = f"Distribución de número de casos por comuna {meningitis_id} ({df.shape[0]} casos)"
+    title = f"Distribución de número de casos de Dengue por comuna ({df.shape[0]} casos)"
     x_axis = "Comuna"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -45,7 +45,7 @@ def chart_dengue():
 
     v = "pac_hos_"
     color = "sexo_"
-    title = f"Distribución de pacientes hospitalizados {meningitis_id} ({df.shape[0]} casos)"
+    title = f"Distribución de pacientes hospitalizados por Dengue ({df.shape[0]} casos)"
     x_axis = "Pacientes hospitalizados"
     y_axis = "Número de casos"
     replace_value = lambda pac: "Hospitalizado" if pac == 1 else "No hospitalizado"
