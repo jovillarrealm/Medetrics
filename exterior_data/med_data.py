@@ -29,7 +29,7 @@ def chart_dengue():
 
     v = "year_"
     color = "sexo_"
-    title = f"Distribución de número de casos de Dengue por año  ({df.shape[0]} casos)"
+    title = f"Distribución de número de casos Dengue por año  ({df.shape[0]} casos)"
     x_axis = "Año de diagnósis"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -37,7 +37,7 @@ def chart_dengue():
         
     v = "comuna"
     color = "sexo_"
-    title = f"Distribución de número de casos de Dengue por comuna ({df.shape[0]} casos)"
+    title = f"Distribución de número de casos Dengue por comuna ({df.shape[0]} casos)"
     x_axis = "Comuna"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -70,7 +70,7 @@ def chart_vih():
     # Sort the DataFrame by 'año'
     v = "año"
     color = "sexo_"
-    title = f"Distribución de número de casos por año VIH ({df.shape[0]} casos)"
+    title = f"Distribución de número de casos VIH por año  ({df.shape[0]} casos)"
     x_axis = "Año de diagnósis"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -80,7 +80,7 @@ def chart_vih():
     ef = df[df[v] != 999]
     color = "sexo_"
     title= (
-        f"Número de casos por Estrato en VIH ({df.shape[0]} casos)"
+        f"Número de casos VIH por Estrato ({df.shape[0]} casos)"
     )
     x_axis = "Estrato"
     y_axis = "Número de casos"
@@ -89,7 +89,7 @@ def chart_vih():
 
     v = "nombre_comuna"
     color = "sexo_"
-    title = f"Distribución de número de casos por comuna {meningitis_id} ({df.shape[0]} casos)"
+    title = f"Distribución de número de casos VIH por comuna ({df.shape[0]} casos)"
     x_axis = "Comuna"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -114,7 +114,7 @@ def chart_viruela_sim():
     v = "a_o"
     color = "sexo"
     title = (
-        f"Distribución de número de casos por año Viruela Símica ({df.shape[0]} casos)"
+        f"Distribución de número de casos Viruela Símica por año ({df.shape[0]} casos)"
     )
     x_axis = "Año de diagnósis"
     y_axis = "Número de casos"
@@ -125,7 +125,7 @@ def chart_viruela_sim():
     v = "estrato"
     color = "sexo"
     title= (
-        f"Número de casos por Estrato en Viruela Símica ({df.shape[0]} casos)"
+        f"Número de casos Viruela Símica por Estrato({df.shape[0]} casos)"
     )
     x_axis = "Estrato"
     y_axis = "Número de casos"
@@ -134,7 +134,7 @@ def chart_viruela_sim():
 
     v = "hospitalizacion"
     color = "sexo"
-    title = f"Distribución de pacientes hospitalizados con Viruela Símica ({df.shape[0]} casos)"
+    title = f"Distribución de pacientes hospitalizados por Viruela Símica ({df.shape[0]} casos)"
     x_axis = "Pacientes hospitalizados"
     y_axis = "Número de casos"
     replace_value = lambda pac: "Hospitalizado" if pac == 1 else "No hospitalizado"
@@ -158,7 +158,7 @@ def chart_meningitis():
     # Sort the DataFrame by 'año'
     v = "year_"
     color = "sexo_"
-    title = f"Distribución de número de casos por año en {meningitis_id} ({df.shape[0]} casos)"
+    title = f"Distribución de número de casos {meningitis_id} por año ({df.shape[0]} casos)"
     x_axis = "Año de diagnósis"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -166,7 +166,7 @@ def chart_meningitis():
 
     v = "comuna"
     color = "sexo_"
-    title = f"Distribución de número de casos por comuna {meningitis_id} ({df.shape[0]} casos)"
+    title = f"Distribución de número de casos {meningitis_id} por comuna ({df.shape[0]} casos)"
     x_axis = "Comuna"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -174,7 +174,7 @@ def chart_meningitis():
    
     v = "pac_hos_"
     color = "sexo_"
-    title = f"Distribución de pacientes hospitalizados {meningitis_id} ({df.shape[0]} casos)"
+    title = f"Distribución de pacientes hospitalizados por {meningitis_id} ({df.shape[0]} casos)"
     x_axis = "Pacientes hospitalizados"
     y_axis = "Número de casos"
     replace_value = lambda pac: "Hospitalizado" if pac == 1 else "No hospitalizado"

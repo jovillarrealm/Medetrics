@@ -29,18 +29,18 @@
         style="font-size: 50px; font-weight: bold; margin: 0; padding: 0; position: absolute; top: 20%; left: 844px;">
         Analiza los casos</h1>
     <p
-        style="font-size: 23px; line-height: 1; text-align: center; padding-top: 20px; font-weight: lighter; position: absolute; top: 41%; left: 48%; width: 460px; height: 79px;">
+        style="font-size: 23px; line-height: 1; text-align: center; padding-top: 20px; font-weight: lighter; position: absolute; top: 41%; left: 50%; width: 460px; height: 79px;">
         <!-- Tu texto aquí -->
         Analiza los casos activos de Covid reportados por nuestros usuarios a través de los gráficos y mantente informado
     </p>
-    <div style="position: absolute; left: 55%; top: 79%;">
+    <div style="position: absolute; left: 59%; top: 79%;">
         <a href="/visualizacion/bienvenida/">
             <button class="btn btn-primary" style="width: 200px; height: 50px; font-weight: bold; font-size: 20px;">Regresar</button>
         </a>
     </div>
 </div>
     
-    <div class="col-md-6" style="width: 592px; height: 494px; margin-top: 90px; left: 90px;">
+    <div class="contenedor" style="width: 1200px; height: 494px; margin-top: 90px; left: 90px; margin-block-end: 10px;">
         {% for plot_div in plotdivs %}
         {{ plot_div|safe }}
         {% endfor %}
