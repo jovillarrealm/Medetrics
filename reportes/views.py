@@ -28,6 +28,8 @@ def reportes(req: HttpRequest):
             form_data['diagnosis_date'] = datetime.combine(form_data['diagnosis_date'], datetime.min.time())    
             form_data['edad_paciente'] = form.cleaned_data['edad_paciente']
             form_data['sexo_paciente'] = form.cleaned_data['sexo_paciente']
+            form_data['fecha_sintomas'] = datetime.combine(form_data['fecha_sintomas'], datetime.min.time())
+            form_data['estrato'] = int(form.cleaned_data['estrato'])
             try:
                 if send_report(form_data):
                     return render(req, "gracias.html")
