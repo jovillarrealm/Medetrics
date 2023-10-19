@@ -56,7 +56,12 @@ def download_feather(new_feather_path:Path, last_modified = None):
         df = download_data()
         df.to_csv(csv_path)
         print(f"Se descargó un csv {csv_path}")
-    df:DataFrame = csv.read_csv(csv_path)
+    if csv_path.is_file():
+        df:DataFrame = csv.read_csv(csv_path)
+    else:
+        df = download_data()
+        df.to_csv(csv_path)
+        print(f"Se descargó un csv {csv_path}")
     feather.write_feather(df=df, dest=new_feather_path)
     print(f"Nuevo dataset {new_feather_path}")
     return df
