@@ -7,4 +7,5 @@
 .venv/
 exterior_data/socratica_secrets.json
 persistencia/mongo.json
-exterior_data/datasets/covid_big_data.feather
+exterior_data/csv/Casos_positivos_de_COVID-19_en_Colombia._20231013.csv
+exterior_data/datasets/covid_data.feather
