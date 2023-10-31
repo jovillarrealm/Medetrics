@@ -79,50 +79,21 @@ def get_departamento_ciudad_barrio(request):
     print(response)
     return JsonResponse(response)
 
-from exterior_data.covid_data import chart_edad
-from exterior_data import med_data
+from visualizacion import covid_charts
+from visualizacion import med_charts
 
 def bienvenida_visualizaciones(req: HttpRequest):
     context = {}
     return render(req, "bienvenida_visualizaciones.html", context)
 
-def visualiza_covid(req: HttpRequest):
-    plot_divs = [chart_edad()]
-    enfermedad = "COVID-19"
-    context = {"plotdivs": plot_divs, "enfermedad": enfermedad}
-    return render(req, "visualiza_covid.html", context)
-
-def visualiza_dengue(req: HttpRequest):
-    plot_divs = med_data.chart_dengue()
-    enfermedad = "Dengue"
-    context = {"plotdivs": plot_divs, "enfermedad": enfermedad}
-    return render(req, "visualiza_enfermedad.html", context)
-
-def visualiza_VIH(req: HttpRequest):
-    plot_divs = med_data.chart_vih()
-    enfermedad = "VIH"
-    context = {"plotdivs": plot_divs, "enfermedad": enfermedad}
-    return render(req, "visualiza_enfermedad.html", context)
-
-def visualiza_viruela_sim(req: HttpRequest):
-    plot_divs = med_data.chart_viruela_sim()
-    enfermedad = "Viruela símica"
-    context = {"plotdivs": plot_divs, "enfermedad": enfermedad}
-    return render(req, "visualiza_enfermedad.html", context)
-
-def visualiza_meningitis(req: HttpRequest):
-    plot_divs = med_data.chart_meningitis()
-    enfermedad = "Meningistis por Haemophilus Influenzae"
-    context = {"plotdivs": plot_divs, "enfermedad": enfermedad}
-    return render(req, "visualiza_enfermedad.html", context)
 
 def visualiza_enfermedad(req: HttpRequest, enf:str):
     datos = {
-        "VIH":(med_data.chart_vih, "VIH"),
-        "meningitis_influenzae": (med_data.chart_meningitis, "Meningitis por Haemophilus Influenzae"),
-        "dengue":(med_data.chart_dengue,"Dengue" ),
-        "viruela_simica":(med_data.chart_viruela_sim, "Viruela símica"),
-        #"covid": (chart_edad, "COVID-19")
+        "VIH":(med_charts.chart_vih, "VIH"),
+        "meningitis_influenzae": (med_charts.chart_meningitis, "Meningitis por Haemophilus Influenzae"),
+        "dengue":(med_charts.chart_dengue,"Dengue" ),
+        "viruela_simica":(med_charts.chart_viruela_sim, "Viruela símica"),
+        "covid": (covid_charts.covid_charts, "COVID-19")
         }
     plots, enfermedad = datos[enf]
     plot_divs= plots()
