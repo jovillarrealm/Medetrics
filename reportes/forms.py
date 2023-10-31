@@ -58,7 +58,7 @@ class ReportForm(BootstrapForm):
     sexo_paciente = forms.ChoiceField(choices=sexo, label="Sexo Paciente")
     # barrio = forms.ChoiceField(choices=barrios ,label="Barrio",widget=forms.Select(attrs={'class': 'form-control'}))
     fecha_sintomas = forms.DateField(label="Fecha inicio de sintomas", widget=forms.DateInput(attrs={'type': 'date'}),)
-    diagnosis_date = forms.DateField(initial=datetime.date.today().strftime("%Y-%m-%d"))
+    diagnosis_date = forms.DateField(label="Fecha de diagnostico", widget=forms.DateInput(attrs={'type': 'date'}),)
     diagnosis_place = forms.ChoiceField(choices=diagnosis_place_choices, label="Lugar de diagnostico")
     diagnosis_validator = forms.CharField(label="Comprobante de diagnóstico")
     
