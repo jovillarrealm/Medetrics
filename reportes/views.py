@@ -9,6 +9,11 @@ from typing import Any
 
 
 # Create your views here.
+def bienvenida_reportes(req: HttpRequest):
+    context = {}
+    return render(req, "bienvenida_reportes.html", context)
+
+
 def reportes(req: HttpRequest):
     if req.method == "GET":
         form = ReportForm()
@@ -41,9 +46,7 @@ def reportes(req: HttpRequest):
         else:
             return render(req, "user_error.html")
         
-def bienvenida_reportes(req: HttpRequest):
-    context = {}
-    return render(req, "bienvenida_reportes.html", context)
+
 
 
 

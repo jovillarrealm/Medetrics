@@ -10,17 +10,9 @@ from exterior_data.ids import *
 
 
 
-
-
 def get_dataset(id):
     # Load .feather de
     BASE_DIR = Path(__file__).resolve().parent
-    enfermedades = {
-        dengue_id: "sivigila_dengue",
-        meningitis_id: "meningitis_por_haemophilus_influenzae",
-        vih_id: "sivigila_vih",
-        viruela_simica_id: "casos_positivos_viruela_simica",
-    }
     file = enfermedades[id] + ".feather"
     try:
         df: DataFrame = feather.read_feather(BASE_DIR / "datasets" / file)
@@ -87,3 +79,4 @@ def get_dataset_remote(id):
         pass
     except:
         print(f"Hubo un error tratando de obtener el recurso para {id}")
+

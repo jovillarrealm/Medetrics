@@ -2,11 +2,11 @@ from django.shortcuts import render
 from .models import Visualizacion
 from django.http import HttpRequest
 from .forms import QueryForm
-
+from time import time
 from datetime import datetime
-from persistencia.visualizacion_dbops import get_reports, get_departamentos
-from visualizacion.custom_charts import chart_custom
-
+from persistencia.visualizacion_dbops import get_reports
+from visualizacion import covid_charts
+from visualizacion import med_charts
 # Create your views here.
 
 
@@ -21,7 +21,7 @@ def visualizacion(request: HttpRequest):
             "visualizacions": visualizacions,
             "reports": reports,
         }
-        chart_custom(reports)
+        
     elif request.method == "POST":
         form = QueryForm(request.POST)
         if form.is_valid():
@@ -54,37 +54,6 @@ def visualizacion(request: HttpRequest):
     return render(request, "visualizacion.html", context)
 
 
-from django.http import JsonResponse
-from persistencia.mongo_data import get_db
-
-
-def get_departamento_ciudad_barrio(request):
-    departamento = request.GET.get("departamento")
-    ciudad = request.GET.get("ciudad")
-    barrio = request.GET.get("barrio")
-
-    collection = get_db()["places"]
-
-    if departamento:
-        ciudades = collection.find({"departamento": departamento}, {"municipio": 1})
-        ciudades = [ciudad["ciudad"] for ciudad in ciudades]
-    else:
-        ciudades = []
-
-    if ciudad:
-        barrios = collection.find({"municipio": ciudad}, {"centro_poblado": 1})
-        barrios = [barrio["barrio"] for barrio in barrios]
-    else:
-        barrios = []
-
-    response = {"departamento": departamento, "ciudades": ciudades, "barrios": barrios}
-    print(response)
-    return JsonResponse(response)
-
-
-from visualizacion import covid_charts
-from visualizacion import med_charts
-
 
 def bienvenida_visualizaciones(req: HttpRequest):
     context = {}
@@ -103,6 +72,12 @@ def visualiza_enfermedad(req: HttpRequest, enf: str):
         "covid": (covid_charts.covid_charts, "COVID-19"),
     }
     plots, enfermedad = datos[enf]
-    plot_divs = plots()
+    plot_divs = plots(get_ttl_hash())
     context = {"plotdivs": plot_divs, "enfermedad": enfermedad}
     return render(req, "visualiza_enfermedad.html", context)
+
+
+# from: https://stackoverflow.com/questions/31771286/python-in-memory-cache-with-time-to-live
+def get_ttl_hash(seconds=24 * 3600):
+    """Return the same value withing `seconds` time period. A day by default."""
+    return round(time() / seconds)

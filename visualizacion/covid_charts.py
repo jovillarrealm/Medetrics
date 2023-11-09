@@ -5,7 +5,8 @@ from pandas import DataFrame
 import functools
 
 @functools.lru_cache(maxsize=1)
-def covid_charts():
+def covid_charts(ttl:int)->tuple:
+    del ttl
     # Sort the DataFrame by 'edad'
     df = get_dataset()
 

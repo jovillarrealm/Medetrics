@@ -5,8 +5,6 @@ from sodapy import Socrata
 from pandas import DataFrame
 from pyarrow import feather
 from pyarrow import csv
-import plotly.express as px
-import plotly.offline as opy
 from datetime import datetime, date
 
 @functools.lru_cache(maxsize=1)

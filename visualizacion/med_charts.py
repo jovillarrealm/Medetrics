@@ -9,7 +9,8 @@ from exterior_data.ids import *
 
 
 @functools.lru_cache(maxsize=1)
-def chart_dengue():
+def chart_dengue(ttl):
+    del ttl
     df = get_dataset(dengue_id)
     
     v = "edad_"
@@ -50,7 +51,8 @@ def chart_dengue():
     return edad_plot_div, ano_plot_div, comuna_plot_div, hospitalizado_plot_div
 
 @functools.lru_cache(maxsize=1)
-def chart_vih():
+def chart_vih(ttl):
+    del ttl
     df = get_dataset(vih_id)
 
     v = "edad_"
@@ -93,7 +95,8 @@ def chart_vih():
 
 
 @functools.lru_cache(maxsize=1)
-def chart_viruela_sim():
+def chart_viruela_sim(ttl):
+    del ttl
     df = get_dataset(viruela_simica_id)
     
     v = "edad"
@@ -139,7 +142,8 @@ def chart_viruela_sim():
     return edad_plot_div, ano_plot_div, estrato_plot_div, hospitalizado_plot_div
 
 @functools.lru_cache(maxsize=1)
-def chart_meningitis():
+def chart_meningitis(ttl):
+    del ttl
     df = get_dataset(meningitis_id)
     v = "edad_"
     color = "sexo_"
@@ -205,3 +209,4 @@ def create_histogram(df: DataFrame, ordered_var: str, color: str, texts):
     plot_div = opy.plot(fig, auto_open=False, output_type="div")
 
     return plot_div
+

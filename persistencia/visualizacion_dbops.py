@@ -33,16 +33,8 @@ def get_reports(
     return db[collection].aggregate(pipeline)
 
 
-import functools
 
-@functools.lru_cache(maxsize=1)
-def get_departamentos():
-    """Departamentos soportados
 
-    Returns:
-       tuple[str]: Departamentos de bolivar
-    """
-    return tuple(get_db()["places"].distinct("departamento"))
 
 
 class Aggregate:
