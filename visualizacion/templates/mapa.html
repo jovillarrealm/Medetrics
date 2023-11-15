@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+{% extends 'base.html' %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block title %}
+  <title>Mostrar mapa</title>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #map-container {
+      height: 65vh;
+      width: 100%;
+    }
+
+    /* Ajusta el ancho según tus necesidades */
+    #map {
+      height: 100%;
+    }
+  </style>
+  {% endblock title %}
+</head>
+
+<body>
+  {% block content %}
+  {% load static %}
+
+  <div id="map-container">
+    <div id="map"></div>
+  </div>
+
+  <script>
+    mapboxgl.accessToken = '{{ MAP_BOX_TOKEN }}';
+
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [-75.5658, 6.2476], // Nueva York como ejemplo de coordenadas
+      zoom: 12
+    });
+
+    // Datos de ejemplo de casos de enfermedad
+    var casosEnfermedad = {{ comunas|safe }};
+    //{ nombre: 'Caso 1', coordenadas: [-75.5658, 6.2476], descripcion: 'Descripción del caso 1' },
+    //{ nombre: 'Caso 2', coordenadas: [-75.55, 6.25], descripcion: 'Descripción del caso 2' },
+    //{ nombre: 'Caso 3', coordenadas: [-75.555, 6.255], descripcion: 'Descripción del caso 3' },
+    // Agrega más casos según sea necesario
+
+
+    // Configurar el estilo del círculo en el mapa
+    var circleLayer = {
+      id: 'circles',
+      type: 'circle',
+      source: {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: casosEnfermedad.map(function (caso) {
+            return {
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: caso.coordenadas,
+              },
+              properties: {
+                title: caso.nombre,
+                description: caso.descripcion,
+              },
+            };
+          }),
+        },
+      },
+      paint: {
+        'circle-radius': 15, // Adjust the circle radius as needed
+        'circle-color': 'red', // Adjust the circle color as 
+        'circle-opacity': 0.3, // Adjust the circle opacity (0.0 to 1.0)
+      },
+    };
+
+    // Agregar la capa del círculo al mapa
+    map.on('load', function () {
+      map.addLayer(circleLayer);
+
+      // Agregar popups
+      map.on('click', 'circles', function (e) {
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = e.features[0].properties.description;
+
+        new mapboxgl.Popup().setLngLat(coordinates).setHTML('<h3>' + e.features[0].properties.title + '</h3><p>' + description + '</p>').addTo(map);
+      });
+
+      // Cambiar el cursor al pasar sobre los círculos
+      map.on('mouseenter', 'circles', function () {
+        map.getCanvas().style.cursor = 'pointer';
+      });
+
+      // Cambiar el cursor al salir de los círculos
+      map.on('mouseleave', 'circles', function () {
+        map.getCanvas().style.cursor = '';
+      });
+    });
+
+  </script>
+  {% endblock content %}
+</body>
+
+</html>

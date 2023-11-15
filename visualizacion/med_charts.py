@@ -43,7 +43,8 @@ def chart_dengue(ttl):
     title = f"Distribución de pacientes hospitalizados por Dengue ({df.shape[0]} casos)"
     x_axis = "Pacientes hospitalizados"
     y_axis = "Número de casos"
-    replace_value = lambda pac: "Hospitalizado" if pac == 1 else "No hospitalizado"
+    def replace_value(pac):
+        return "Hospitalizado" if pac == 1 else "No hospitalizado"
     df[v] = df[v].apply(replace_value)
     textos = title, x_axis, y_axis
     hospitalizado_plot_div = create_histogram(df, v, color, textos)
@@ -134,7 +135,8 @@ def chart_viruela_sim(ttl):
     title = f"Distribución de pacientes hospitalizados por Viruela Símica ({df.shape[0]} casos)"
     x_axis = "Pacientes hospitalizados"
     y_axis = "Número de casos"
-    replace_value = lambda pac: "Hospitalizado" if pac == 1 else "No hospitalizado"
+    def replace_value(pac):
+        return "Hospitalizado" if pac == 1 else "No hospitalizado"
     df[v] = df[v].apply(replace_value)
     textos = title, x_axis, y_axis
     hospitalizado_plot_div = create_histogram(df, v, color, textos)
@@ -175,7 +177,8 @@ def chart_meningitis(ttl):
     title = f"Distribución de pacientes hospitalizados por {ids.meningitis_id} ({df.shape[0]} casos)"
     x_axis = "Pacientes hospitalizados"
     y_axis = "Número de casos"
-    replace_value = lambda pac: "Hospitalizado" if pac == 1 else "No hospitalizado"
+    def replace_value(pac):
+        return "Hospitalizado" if pac == 1 else "No hospitalizado"
     df[v] = df[v].apply(replace_value)
     textos = title, x_axis, y_axis
     hospitalizado_plot_div = create_histogram(df, v, color, textos)

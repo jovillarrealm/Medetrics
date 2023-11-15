@@ -7,6 +7,8 @@ from datetime import datetime
 from persistencia.visualizacion_dbops import get_reports
 from visualizacion import covid_charts
 from visualizacion import med_charts
+from visualizacion.ma import get_mapbox_token, build_comunas
+
 # Create your views here.
 
 
@@ -76,6 +78,13 @@ def visualiza_enfermedad(req: HttpRequest, enf: str):
     context = {"plotdivs": plot_divs, "enfermedad": enfermedad}
     return render(req, "visualiza_enfermedad.html", context)
 
+
+def mapa(req):
+    comunas = build_comunas()
+    print(comunas)
+    context={"MAP_BOX_TOKEN": get_mapbox_token(),
+             "comunas":comunas}
+    return render(req, "mapa.html", context)
 
 # from: https://stackoverflow.com/questions/31771286/python-in-memory-cache-with-time-to-live
 def get_ttl_hash(seconds=24 * 3600):
