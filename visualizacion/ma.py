@@ -43,15 +43,12 @@ def build_comunas():
     for i in comunas:
         comunas[i].reverse()
         comunas[i] = [comunas[i]]
-    print(comunas)
-    print()
-    print()
+
     for comuna_df, casos_df in df_dengue.groupby(by=["comuna"]).size().items():
         for i in comunas:
             if comuna_df in i:
                 comunas[i].append(f"Casos dengue: {casos_df}")
-    print(comunas)
-    print()
+
     for comuna_df, casos_df in df_meningitis.groupby(by=["comuna"]).size().items():
         for i in comunas:
             if comuna_df in i:
@@ -62,8 +59,7 @@ def build_comunas():
                     ]
                 else:
                     comunas[i] = [comunas[i][0], f"Casos meningitis: {casos_df}"]
-    print(comunas)
-    print()
+
 
     resultado = [
         {

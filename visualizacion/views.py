@@ -81,7 +81,6 @@ def visualiza_enfermedad(req: HttpRequest, enf: str):
 
 def mapa(req):
     comunas = build_comunas()
-    print(comunas)
     context={"MAP_BOX_TOKEN": get_mapbox_token(),
              "comunas":comunas}
     return render(req, "mapa.html", context)
