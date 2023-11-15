@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "signup",
     "persistencia",
     "exterior_data",
+    "analitica",
     "rest_framework",
 ]
 

@@ -4,14 +4,14 @@ import functools
 from pandas import DataFrame
 import plotly.express as px
 import plotly.offline as opy
-from exterior_data.ids import *
+from exterior_data.med_data import ids
 
 
 
 @functools.lru_cache(maxsize=1)
 def chart_dengue(ttl):
     del ttl
-    df = get_dataset(dengue_id)
+    df = get_dataset(ids.dengue_id)
     
     v = "edad_"
     color = "sexo_"
@@ -53,7 +53,7 @@ def chart_dengue(ttl):
 @functools.lru_cache(maxsize=1)
 def chart_vih(ttl):
     del ttl
-    df = get_dataset(vih_id)
+    df = get_dataset(ids.vih_id)
 
     v = "edad_"
     color = "sexo_"
@@ -97,7 +97,7 @@ def chart_vih(ttl):
 @functools.lru_cache(maxsize=1)
 def chart_viruela_sim(ttl):
     del ttl
-    df = get_dataset(viruela_simica_id)
+    df = get_dataset(ids.viruela_simica_id)
     
     v = "edad"
     color = "sexo"
@@ -144,10 +144,10 @@ def chart_viruela_sim(ttl):
 @functools.lru_cache(maxsize=1)
 def chart_meningitis(ttl):
     del ttl
-    df = get_dataset(meningitis_id)
+    df = get_dataset(ids.meningitis_id)
     v = "edad_"
     color = "sexo_"
-    title = f"Distribución de edad en {meningitis_id} ({df.shape[0]} casos)"
+    title = f"Distribución de edad en {ids.meningitis_id} ({df.shape[0]} casos)"
     x_axis = "Edad"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -156,7 +156,7 @@ def chart_meningitis(ttl):
     # Sort the DataFrame by 'año'
     v = "year_"
     color = "sexo_"
-    title = f"Distribución de número de casos {meningitis_id} por año ({df.shape[0]} casos)"
+    title = f"Distribución de número de casos {ids.meningitis_id} por año ({df.shape[0]} casos)"
     x_axis = "Año de diagnósis"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -164,7 +164,7 @@ def chart_meningitis(ttl):
 
     v = "comuna"
     color = "sexo_"
-    title = f"Distribución de número de casos {meningitis_id} por comuna ({df.shape[0]} casos)"
+    title = f"Distribución de número de casos {ids.meningitis_id} por comuna ({df.shape[0]} casos)"
     x_axis = "Comuna"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -172,7 +172,7 @@ def chart_meningitis(ttl):
    
     v = "pac_hos_"
     color = "sexo_"
-    title = f"Distribución de pacientes hospitalizados por {meningitis_id} ({df.shape[0]} casos)"
+    title = f"Distribución de pacientes hospitalizados por {ids.meningitis_id} ({df.shape[0]} casos)"
     x_axis = "Pacientes hospitalizados"
     y_axis = "Número de casos"
     replace_value = lambda pac: "Hospitalizado" if pac == 1 else "No hospitalizado"

@@ -2,18 +2,18 @@ from pandas import DataFrame
 import requests
 
 from pathlib import Path
-from datetime import datetime, date
+from datetime import datetime
 from pyarrow import csv
 from pyarrow import feather
-import statsmodels.api as sm
-from exterior_data.ids import *
+
+import exterior_data.ids as ids
 
 
 
 def get_dataset(id):
     # Load .feather de
     BASE_DIR = Path(__file__).resolve().parent
-    file = enfermedades[id] + ".feather"
+    file = ids.enfermedades[id] + ".feather"
     try:
         df: DataFrame = feather.read_feather(BASE_DIR / "datasets" / file)
     except:
