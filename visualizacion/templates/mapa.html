@@ -15,14 +15,14 @@
       margin: 0;
       padding: 0;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
       height: 100vh;
     }
 
     #map-container {
       height: 65vh;
       width: 100%;
+      margin-top: 50px; /* Ajusta la altura según la altura de tu barra de navegación */
     }
 
     /* Ajusta el ancho según tus necesidades */
@@ -47,12 +47,12 @@
     var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-75.5658, 6.2476], // Nueva York como ejemplo de coordenadas
+      center: [-75.5658, 6.2476], 
       zoom: 12
     });
 
     // Datos de ejemplo de casos de enfermedad
-    var casosEnfermedad = {{ comunas|safe }};
+    var casosEnfermedad = {{ comunas | safe }};
     //{ nombre: 'Caso 1', coordenadas: [-75.5658, 6.2476], descripcion: 'Descripción del caso 1' },
     //{ nombre: 'Caso 2', coordenadas: [-75.55, 6.25], descripcion: 'Descripción del caso 2' },
     //{ nombre: 'Caso 3', coordenadas: [-75.555, 6.255], descripcion: 'Descripción del caso 3' },
@@ -83,7 +83,7 @@
         },
       },
       paint: {
-        'circle-radius': 15, // Adjust the circle radius as needed
+        'circle-radius': 20, // Adjust the circle radius as needed
         'circle-color': 'red', // Adjust the circle color as 
         'circle-opacity': 0.3, // Adjust the circle opacity (0.0 to 1.0)
       },
