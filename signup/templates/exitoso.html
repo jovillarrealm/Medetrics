@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title> Envío completado </title>
+{% endblock title %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+      Reporte enviado.
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Muchas gracias por diligenciar el reporte</h5>
+      <p class="card-text">Con el apoyo de información como la de personas como usted, podemos mantener la comunidad a salvo.</p>
+      <a href="{% url 'signup' %}" class="btn btn-primary">Hacer otro reporte</a>
+    </div>
+  </div>
+{% endblock content %}
