@@ -4,13 +4,14 @@ import functools
 from pandas import DataFrame
 import plotly.express as px
 import plotly.offline as opy
-from exterior_data.ids import *
+from exterior_data.med_data import ids
 
 
 
 @functools.lru_cache(maxsize=1)
-def chart_dengue():
-    df = get_dataset(dengue_id)
+def chart_dengue(ttl):
+    del ttl
+    df = get_dataset(ids.dengue_id)
     
     v = "edad_"
     color = "sexo_"
@@ -42,7 +43,8 @@ def chart_dengue():
     title = f"Distribución de pacientes hospitalizados por Dengue ({df.shape[0]} casos)"
     x_axis = "Pacientes hospitalizados"
     y_axis = "Número de casos"
-    replace_value = lambda pac: "Hospitalizado" if pac == 1 else "No hospitalizado"
+    def replace_value(pac):
+        return "Hospitalizado" if pac == 1 else "No hospitalizado"
     df[v] = df[v].apply(replace_value)
     textos = title, x_axis, y_axis
     hospitalizado_plot_div = create_histogram(df, v, color, textos)
@@ -50,8 +52,9 @@ def chart_dengue():
     return edad_plot_div, ano_plot_div, comuna_plot_div, hospitalizado_plot_div
 
 @functools.lru_cache(maxsize=1)
-def chart_vih():
-    df = get_dataset(vih_id)
+def chart_vih(ttl):
+    del ttl
+    df = get_dataset(ids.vih_id)
 
     v = "edad_"
     color = "sexo_"
@@ -93,8 +96,9 @@ def chart_vih():
 
 
 @functools.lru_cache(maxsize=1)
-def chart_viruela_sim():
-    df = get_dataset(viruela_simica_id)
+def chart_viruela_sim(ttl):
+    del ttl
+    df = get_dataset(ids.viruela_simica_id)
     
     v = "edad"
     color = "sexo"
@@ -131,7 +135,8 @@ def chart_viruela_sim():
     title = f"Distribución de pacientes hospitalizados por Viruela Símica ({df.shape[0]} casos)"
     x_axis = "Pacientes hospitalizados"
     y_axis = "Número de casos"
-    replace_value = lambda pac: "Hospitalizado" if pac == 1 else "No hospitalizado"
+    def replace_value(pac):
+        return "Hospitalizado" if pac == 1 else "No hospitalizado"
     df[v] = df[v].apply(replace_value)
     textos = title, x_axis, y_axis
     hospitalizado_plot_div = create_histogram(df, v, color, textos)
@@ -139,11 +144,12 @@ def chart_viruela_sim():
     return edad_plot_div, ano_plot_div, estrato_plot_div, hospitalizado_plot_div
 
 @functools.lru_cache(maxsize=1)
-def chart_meningitis():
-    df = get_dataset(meningitis_id)
+def chart_meningitis(ttl):
+    del ttl
+    df = get_dataset(ids.meningitis_id)
     v = "edad_"
     color = "sexo_"
-    title = f"Distribución de edad en {meningitis_id} ({df.shape[0]} casos)"
+    title = f"Distribución de edad en {ids.meningitis_id} ({df.shape[0]} casos)"
     x_axis = "Edad"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -152,7 +158,7 @@ def chart_meningitis():
     # Sort the DataFrame by 'año'
     v = "year_"
     color = "sexo_"
-    title = f"Distribución de número de casos {meningitis_id} por año ({df.shape[0]} casos)"
+    title = f"Distribución de número de casos {ids.meningitis_id} por año ({df.shape[0]} casos)"
     x_axis = "Año de diagnósis"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -160,7 +166,7 @@ def chart_meningitis():
 
     v = "comuna"
     color = "sexo_"
-    title = f"Distribución de número de casos {meningitis_id} por comuna ({df.shape[0]} casos)"
+    title = f"Distribución de número de casos {ids.meningitis_id} por comuna ({df.shape[0]} casos)"
     x_axis = "Comuna"
     y_axis = "Número de casos"
     textos = title, x_axis, y_axis
@@ -168,10 +174,11 @@ def chart_meningitis():
    
     v = "pac_hos_"
     color = "sexo_"
-    title = f"Distribución de pacientes hospitalizados por {meningitis_id} ({df.shape[0]} casos)"
+    title = f"Distribución de pacientes hospitalizados por {ids.meningitis_id} ({df.shape[0]} casos)"
     x_axis = "Pacientes hospitalizados"
     y_axis = "Número de casos"
-    replace_value = lambda pac: "Hospitalizado" if pac == 1 else "No hospitalizado"
+    def replace_value(pac):
+        return "Hospitalizado" if pac == 1 else "No hospitalizado"
     df[v] = df[v].apply(replace_value)
     textos = title, x_axis, y_axis
     hospitalizado_plot_div = create_histogram(df, v, color, textos)
@@ -205,3 +212,4 @@ def create_histogram(df: DataFrame, ordered_var: str, color: str, texts):
     plot_div = opy.plot(fig, auto_open=False, output_type="div")
 
     return plot_div
+

@@ -50,7 +50,7 @@ class BootstrapForm(forms.Form):
 class ReportForm(BootstrapForm):
 
     disease = forms.ChoiceField(choices=enfermedad_choices, label="Enfermedad")
-    municipio = forms.CharField( label="Municipio")
+    municipio = forms.CharField(label="Municipio")
     # municipio = forms.ChoiceField(choices=municipios ,label="Municipio",widget=forms.Select(attrs={'class': 'form-control'}))
     barrio = forms.CharField( label="Barrio")
     edad_paciente = forms.IntegerField(label="Edad Paciente")
