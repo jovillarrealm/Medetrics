@@ -5,39 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrarse</title>
-    <!-- Agrega el enlace a Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
-    <!-- Agrega el tipo de letra Inter -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 
     <style>
-        /* Estilos personalizados para el formulario de registro */
         body {
             background-image: url('https://cdn.discordapp.com/attachments/734236371316768839/1151564507777339392/bb4b1a6f-ee46-44d3-a183-d0de98d17b09.jpg');
             background-color: #fff;
             background-size: cover;
-            /* Cambia el color de fondo a azul */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
             font-family: 'Inter', sans-serif;
-            /* Aplica el tipo de letra Inter */
             color: white;
             margin: 0;
         }
 
         .container {
             max-width: 400px;
-            /* Aumenta el ancho del contenedor */
             padding: 20px;
             background-color: #001A59;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             margin-top: 0;
-            /* Espacio entre la imagen y el contenedor */
             margin-bottom: 0px;
         }
 
@@ -47,36 +39,25 @@
 
         .form-group {
             margin-bottom: 15px;
-            /* Reducir el margen inferior del grupo de formulario */
         }
 
         .form-control {
             height: 35px;
-            /* Reducir la altura de los campos de entrada */
         }
 
-        /* Estilo personalizado para el botón de Registrarse */
         .btn-primary {
             background-color: #366CF1;
-            /* Cambia el color del botón a azul */
             border-color: #366CF1;
-            /* Cambia el color del borde del botón a azul */
         }
 
-        /* Estilo personalizado para los campos de texto */
         label {
             font-weight: bold;
-            /* Aplica negrita a las etiquetas */
             font-family: 'Inter', sans-serif;
-            /* Aplica el tipo de letra Inter a las etiquetas */
         }
 
-        /* Estilo para la imagen */
         .centered-image {
             max-width: 150px;
-            /* Ajusta el ancho de la imagen según tus necesidades */
             margin-top: 85px ;
-            /* Espacio superior e inferior */
         }
     </style>
     {% load static %}
@@ -84,7 +65,6 @@
 </head>
 
 <body>
-    <!-- Agregar la imagen centrada en la parte superior -->
 
     <img src="{% static 'images/signup.png' %}" alt="Imagen"
         class="centered-image">
@@ -101,7 +81,6 @@
             </div>
             {% endfor %}
             
-            <!-- Botón dentro del form -->
             <button type="submit" class="btn btn-primary" style="width: 180px; margin-top: 19px; height: 40px; text-align: center; font-weight: bold; font-size: 18px;">Registrarse</button>
         </form>
         <p class="text-center"><a href="{% url 'login' %}" style="color: white;">¿Ya tienes una cuenta? Ingresa aquí</a></p>
@@ -111,7 +90,6 @@
         Una idea de EAFIT | © Copyright 2023
     </footer>
 
-    <!-- Agrega el script de Bootstrap al final del documento -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-KyZXEAg3QhqLMpG8r+dl+VmbdFf/4C5nP5h+CWhcl5n5HPr1Oksd3P/hfX4Pp6q7G"
         crossorigin="anonymous"></script>
