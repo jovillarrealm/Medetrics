@@ -62,6 +62,6 @@ class ReportForm(BootstrapForm):
     diagnosis_date = forms.DateField(label="Fecha de diagnostico", widget=forms.DateInput(attrs={'type': 'date'}),)
     diagnosis_place = forms.ChoiceField(choices=diagnosis_place_choices, label="Lugar de diagnostico")
     diagnosis_validator = forms.CharField(label="Comprobante de diagnóstico")
-    numero_salud = forms.IntegerField(label= "", widget=forms.HiddenInput())
+    numero_salud = forms.IntegerField(label= "", widget=forms.HiddenInput(), required=True)
     
     

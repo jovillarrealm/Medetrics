@@ -62,3 +62,29 @@ def buscar_numero_salud(email, contraseña):
     except Exception as e:
         print(f"Error al buscar coincidencias en la colección: {e}")
         return None  # Manejar errores devolviendo None
+    
+def buscar_y_actualizar_contraseña(email, nueva_contraseña):
+    try:
+        # Obtenemos la base de datos utilizando la función getdata()
+        db = getdata()
+
+        # Accedemos a la colección específica
+        collection = db['usuarios']
+
+        # Realizamos la búsqueda con el campo de correo
+        query = {"email": email}
+        resultado = collection.find_one(query)
+
+        # Verificamos si hay un resultado (coincidencia)
+        if resultado:
+            print("Usuario encontrado. Actualizando contraseña...")
+            # Actualizamos el valor de la contraseña por el nuevo valor proporcionado
+            collection.update_one({"email": email}, {"$set": {"contraseña": nueva_contraseña}})
+            print("Contraseña actualizada exitosamente.")
+            return True
+        else:
+            print("No se encontró ningún usuario con ese correo.")
+            return False
+    except Exception as e:
+        print(f"Error al buscar o actualizar la contraseña: {e}")
+        return False

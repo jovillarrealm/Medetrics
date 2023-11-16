@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title> Envío Fallido </title>
+{% endblock title %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+      No se pudo crear la cuenta
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">hubo un fallo al crear la cuenta</h5>
+      <p class="card-text">El problema es de nuestro lado, lo sentimos mucho por las molestias</p>
+      <a href="{% url 'sigup' %}" class="btn btn-primary">Intenta de nuevo</a>
+    </div>
+  </div>
+{% endblock content %}
