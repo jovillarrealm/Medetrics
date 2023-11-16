@@ -8,7 +8,7 @@
 
 {% block content %}
 
-<form method="post" class="form" style="margin-bottom: 120px; margin-top: 200px;">  <!-- Agregado margin-top aquí -->
+<form method="post" class="form" style="margin-bottom: 120px; margin-top: 80px;"> 
     {% csrf_token %}
     
     {% for field in form %}
@@ -17,8 +17,6 @@
         {{ field }}
     </div>
     {% endfor %}
-    
-    <!-- Botón dentro del form -->
     <button type="submit" class="btn btn-primary" style="width: 180px; margin-top: 19px; height: 40px; text-align: center; font-weight: bold; font-size: 18px;">Enviar Reporte</button>
 </form>
 

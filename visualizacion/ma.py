@@ -22,22 +22,22 @@ def build_comunas():
     # print(df_meningitis.groupby(by=["comuna"]).size())
 
     comunas = {
-        "Comuna 1 - Popular": [6.255417, -75.578611],
-        "Comuna 2 - Santa Cruz": [6.241111, -75.567222],
-        "Comuna 3 - Manrique": [6.244167, -75.555278],
-        "Comuna 4 - Aranjuez": [6.227778, -75.552222],
-        "Comuna 5 - Castilla": [6.226944, -75.541389],
-        "Comuna 6 - Doce de Octubre": [6.224722, -75.531667],
-        "Comuna 7 - Robledo": [6.227778, -75.521944],
-        "Comuna 8 - Villa Hermosa": [6.237222, -75.513333],
-        "Comuna 9 - Buenos Aires": [6.246667, -75.506944],
-        "Comuna 10 - La Candelaria": [6.258333, -75.506667],
-        "Comuna 11 - Laureles-Estadio": [6.263333, -75.516667],
-        "Comuna 12 - La América": [6.266667, -75.528056],
-        "Comuna 13 - San Javier": [6.268056, -75.538056],
-        "Comuna 14 - Belen": [6.270278, -75.548056],
-        "Comuna 15 - Guayabal": [6.272222, -75.558056],
-        "Comuna 16 - El Poblado": [6.274167, -75.568056],
+        "Comuna 1 - Popular": [6.2933437, -75.5448249],
+        "Comuna 2 - Santa Cruz": [6.2969558, -75.5548517],
+        "Comuna 3 - Manrique": [6.2750611, -75.545892],
+        "Comuna 4 - Aranjuez": [6.2777235, -75.5625988],
+        "Comuna 5 - Castilla": [6.2936989, -75.5682636],
+        "Comuna 6 - Doce de Octubre": [6.297565, -75.5775562],
+        "Comuna 7 - Robledo": [6.2790741, -75.5887669],
+        "Comuna 8 - Villa Hermosa": [6.24579365, -75.5465954114156],
+        "Comuna 9 - Buenos Aires": [6.2307786, -75.5565935],
+        "Comuna 10 - La Candelaria": [6.2501021, -75.5679154],
+        "Comuna 11 - Laureles-Estadio": [6.2492382, -75.5886543],
+        "Comuna 12 - La América": [6.2507013, -75.6079043],
+        "Comuna 13 - San Javier": [6.2562742, -75.6215434],
+        "Comuna 14 - El Poblado": [6.2010917, -75.5656654],
+        "Comuna 15 - Guayabal": [6.2175494, -75.5848914],
+        "Comuna 16 - Belen": [6.2258758, -75.6004937],
     }
 
     for i in comunas:
