@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from reportes.forms import ReportForm
 
+
 from datetime import datetime
 
 from persistencia.reportes_dbops  import send_report
@@ -16,7 +17,8 @@ def bienvenida_reportes(req: HttpRequest):
 
 def reportes(req: HttpRequest):
     if req.method == "GET":
-        form = ReportForm()
+        numero_salud = req.session.get('numero_salud')  # Obtener el valor de la sesión
+        form = ReportForm(initial={'numero_salud': numero_salud})
         context = {"form": form}
         return render(req, "reporte.html", context)
     elif req.method == "POST":

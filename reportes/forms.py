@@ -3,6 +3,7 @@ from django import forms
 from django.forms import ModelForm
 import datetime
 from persistencia.reportes_dbops import get_input_data
+
 pack = lambda li: ((field, field) for field in li)
 sexo = [
     ('F', 'Femenino'),
@@ -61,4 +62,6 @@ class ReportForm(BootstrapForm):
     diagnosis_date = forms.DateField(label="Fecha de diagnostico", widget=forms.DateInput(attrs={'type': 'date'}),)
     diagnosis_place = forms.ChoiceField(choices=diagnosis_place_choices, label="Lugar de diagnostico")
     diagnosis_validator = forms.CharField(label="Comprobante de diagnóstico")
+    numero_salud = forms.IntegerField(label= "", widget=forms.HiddenInput())
+    
     

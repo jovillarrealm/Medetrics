@@ -33,10 +33,17 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
                     <div class="navbar-nav ms-auto">
+                        {% if request.session.valido == 1 %}
                         <a class="nav-link" href="/reportes/bienvenida/" style="color: #366CF1; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: bold;">Reportes</a>
+                        {% endif %}
                         <a class="nav-link" href="/visualizacion/bienvenida" style="color: #366CF1; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: bold;">Visualización</a>
+                        {% if request.session.valido == 1 %}
+                        <a id="logout-link" class="nav-link" href="{% url 'logout' %}" style="color: #366CF1; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: bold;">Log Out</a>                        
+                        
+                        {% else %}
                         <a class="nav-link" href="{% url 'login' %}" style="color: #366CF1; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: bold;">Login</a>
                         <a class="nav-link" href="{% url 'signup' %}" style="color: #366CF1; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: bold;">Sign Up</a>
+                        {% endif %}
                     </div>
                     
                 </div>

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "exterior_data",
     "analitica",
     "rest_framework",
+    "logout",
 ]
 
 MIDDLEWARE = [
